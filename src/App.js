@@ -10,6 +10,7 @@ class App extends Component {
     super();
     this.state = {
       departments: [],
+      items: []
     }
   }
 
@@ -19,66 +20,63 @@ class App extends Component {
 
     dbRef.on('value', (data) => {
       const firebaseDataObject = data.val();
+      // console.log(firebaseDataObject)
 
       let deptArray = [];
+      let itemArray = [];
+
       for (let deptKey in firebaseDataObject) {
-        const eachItem = firebaseDataObject[deptKey];
-        const formattedDepts = {
-          dept: deptKey,
-          items: {
-            eachItem
-          }
-        };
+        // console.log(deptKey);
+        // console.log(firebaseDataObject);
+        
+        // const eachItem = [firebaseDataObject[deptKey]];
+        // const formattedDepts = {
+        //   dept: deptKey,
+        //   items: eachItem
+        // };
+        // deptArray.push(formattedDepts);
 
-        deptArray.push(formattedDepts);
+      
+        // this.setState({
+        //   departments: deptArray
+        // })
 
-        console.log(deptArray)
+        // console.log('depos', this.state.departments)
+       
 
-        this.setState({
-          departments: deptArray
-        })
+        for (let itemKey in firebaseDataObject[deptKey]) {
+
+          const individualItem = firebaseDataObject[deptKey][itemKey];
+          
+          itemArray.push(individualItem);
+          this.setState({
+            items: individualItem
+          })
+          console.log(itemArray);
+        }
       }
     })
-
-    let itemArray = [];
-    for (let itemKey in eachItem) {
-      const individualItem = eachItem[itemKey]
-      itemArray.push(individualItem);
-    }
-    
   }
-
-    // User input field to enter item to be added to list - class componenent
-
-    // Add item to list button - class component
-
-    // Save item to firebase
-
-    // Render item to list with the following: - class component
-        // A completed / not-completed checkbox
-        // An empty aisle #/dept input field to be saved to associated item in an array 
-        // Remove item from list (but not firebase) button and functionality
-
-    // Mark item as completed functionality - class component
-
-    // Prompt user to enter aisle/dept when marking as complete - function component
-
-    // Sort by aisle #/dept button - class component
 
   render() { 
       return (
           <div className='wrapper'>
             <InputNewItem />
             {
-              this.state.departments.map((dept, i) => {
-                console.log(dept);
+              this.state.departments.map((singleDept, i) => {
+                console.log(singleDept);
                 return (
-                  <ul>
-                    <ShowList 
-                      key={i}
-                      dept={dept.dept}
-                      items={itemArray}
-                    />
+                  <ul  key={i}>
+                    <li>
+                      <p>{singleDept.dept}</p>
+                      <p>{singleDept.items}</p>
+
+                    </li>
+                    {/* <ShowList 
+                      dept={singleDept.dept}
+                      items={singleDept.items}
+                    /> */}
+
                   </ul>
                   
                 )

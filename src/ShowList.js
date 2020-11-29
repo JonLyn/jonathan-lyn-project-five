@@ -1,4 +1,4 @@
-const ShowList = ({ dept, itemArray }) => {
+const ShowList = ({ dept, items }) => {
     return (
         <li className="listItem">
             <h2>{dept}</h2>
