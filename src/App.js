@@ -19,15 +19,11 @@ class App extends Component {
 
   // connect to Firebase and get existing and updated data from the database
   componentDidMount() {
-
-      // console.log(this.state.departments)
     const dbRef = firebase.database().ref();
 
     dbRef.on('value', (data) => {
 
       const firebaseDataObject = data.val();
-
-      console.log(firebaseDataObject);
 
       if (firebaseDataObject === null) {
         this.setState({
@@ -38,11 +34,10 @@ class App extends Component {
           return [(key), firebaseDataObject[key]];
         })
         
-
-      this.setState({
-        departments: deptArray,
-        enterItem: ''
-      })
+        this.setState({
+          departments: deptArray,
+          enterItem: ''
+        })
       }      
     })
   }
@@ -51,7 +46,9 @@ class App extends Component {
     const dbRef = firebase.database().ref();
     let deptOrAisle = `/${dept[0]}/`;
 
-    dbRef.child( deptOrAisle + itemKey).remove();
+    console.log(itemKey)
+
+    dbRef.child(deptOrAisle + itemKey).remove();
 
     dbRef.on('value', (data) => {
       const firebaseDataObject = data.val();
@@ -61,17 +58,18 @@ class App extends Component {
         departments: []
       })
       }
-
-      
     })
   }
 
+  markCompleted = (itemKey, dept) => {
+    const dbRef = firebase.database().ref();
+    let completePath = `/${dept[0]}/${itemKey}/`;
 
-  // handleReload = (e) => {
-  //   e.preventDefault();
-  //   const dbRef = firebase.database().ref();
-  //   dbRef.set(this.state.originalDepartments);
-  // }
+    dbRef.child(completePath).update({0: true});
+
+  }
+
+
 
   render() { 
     return (
@@ -107,6 +105,8 @@ class App extends Component {
                             
                             <button onClick={ () => { this.removeItemFromDb(item[0], dept) }}>Remove</button>
 
+                            <button onClick={ () => { this.markCompleted(item[0], dept) } }>Complete</button>
+
                           </div>
                             // {/* <RemoveItem 
                             //   item={item[1]}
@@ -137,49 +137,3 @@ class App extends Component {
 }
 
 export default App;
-
-// let itemArray = [];
-      // let deptArray = [];
-      // for (let deptKey in firebaseDataObject) {
-
-      //   const individualChicken = firebaseDataObject[deptKey];
-      //   console.log(individualChicken);
-        
-      //   const formattedDepts = {
-      //     dept: deptKey,
-      //     items: [individualChicken]
-      //   }
-      //   deptArray.push(formattedDepts);
-
-      //   console.log('format', formattedDepts);
-
-      //   this.setState({
-      //     departments: testArray
-      //   })
-
-
-
-        // console.log('state', this.state.departments)
-  
-
-        
-    //     for (let itemKey in firebaseDataObject[deptKey]) {
-    //       console.log('itemkey', itemKey);
-
-    //       const individualItem = firebaseDataObject[deptKey][itemKey];
-
-    //       console.log('for in item', individualItem);
-    //       itemArray.push(individualItem);
-        
-    //       const eachItem = itemArray
-    //       console.log(eachItem);
-          
-          
-    //       console.log('depos', this.state.departments)
-    //       console.log('items', this.state.items)
-    //     }
-    //   }
-    //   console.log('itemmssss', itemArray);
-    //   this.setState({
-    //     items: itemArray
-    // })
