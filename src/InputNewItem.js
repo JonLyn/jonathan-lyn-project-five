@@ -9,7 +9,8 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: 'Unknown'
+            dept: 'Unknown',
+            itemNotComplete: []
         }
     }
 
@@ -25,10 +26,21 @@ class InputNewItem extends Component {
         })
     }
 
+    
+
     handleSubmit = (e) => {
         e.preventDefault();
+
+        let inputted = this.state.userInput
+
+        let itemNotCompletedArray = [false, inputted]
+
         const dbRef = firebase.database().ref();
-        dbRef.child(this.state.dept).push(this.state.userInput);
+        dbRef.child(this.state.dept).push(itemNotCompletedArray);
+
+       
+
+
         this.setState({
             userInput: ''
         })

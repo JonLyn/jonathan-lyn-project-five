@@ -27,12 +27,17 @@ class App extends Component {
 
       const firebaseDataObject = data.val();
 
+      console.log(firebaseDataObject);
+
       if (firebaseDataObject === null) {
         this.setState({
           enterItem: 'Enter an item to your list'
         }) 
       } else {
-        let deptArray = Object.keys(firebaseDataObject).map((key) => [(key), firebaseDataObject[key]]);
+        let deptArray = Object.keys(firebaseDataObject).map((key) => {
+          return [(key), firebaseDataObject[key]];
+        })
+        
 
       this.setState({
         departments: deptArray,
@@ -41,7 +46,7 @@ class App extends Component {
       }      
     })
   }
-  
+
   removeItemFromDb = (itemKey, dept) => {
     const dbRef = firebase.database().ref();
     let deptOrAisle = `/${dept[0]}/`;
