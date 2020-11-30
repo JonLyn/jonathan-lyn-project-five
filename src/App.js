@@ -3,43 +3,144 @@ import { Component } from 'react';
 import firebase from './firebase.js';
 import InputNewItem from './InputNewItem.js';
 // import ShowList from './ShowList.js';
+// import RemoveItem from './RemoveItem.js'
 
 class App extends Component {
 
   constructor() {
     super();
-    this.state = {
+    this.state = { 
       departments: [],
       items: []
     }
   }
 
+  removeItem = (keyOfItemToDelete) => {
+
+    console.log(keyOfItemToDelete)
+
+    const copyOfItemsArray = [this.state.items]
+    console.log(copyOfItemsArray)
+
+    copyOfItemsArray[0].forEach((itemKey) => {
+      console.log('each key', itemKey)
+      if (itemKey[0] === keyOfItemToDelete) {
+        console.log('yes')
+        const itemsLeft = itemKey.filter((item, index) => {
+          return itemKey === index
+        })
+        console.log('itemsleft', itemsLeft)
+        this.setState({
+          items: itemsLeft
+        })
+      }
+    })
+    
+  }  
+
+
+
+
+
   // connect to Firebase and get existing and updated data from the database
   componentDidMount() {
+
+      // console.log(this.state.departments)
     const dbRef = firebase.database().ref();
 
     dbRef.on('value', (data) => {
       const firebaseDataObject = data.val();
 
-      console.log(firebaseDataObject);
+      // console.log(firebaseDataObject);
       let deptArray = Object.keys(firebaseDataObject).map((key) => [(key), firebaseDataObject[key]]);
 
-      // console.log(deptArray[1])
-
-      // let itemArray = Object.values(deptArray[1])
-      // console.log(itemArray);
-      // let itemArray = Object.keys(deptArray).map((keys) => [(keys), deptArray[keys]]);
-      // console.log('items', itemArray);
-
+      // console.log('depo array', deptArray)
 
       this.setState({
         departments: deptArray
       })
+
       console.log(this.state.departments)
 
-      // let itemArray = []
+      let itemAndKeyArray = [];
+      this.state.departments.map((singleDept) => {
+        for (let idKey in singleDept[1]) {
+          const itemIds = [idKey, singleDept[1][idKey]]
+          itemAndKeyArray.push(itemIds)
+        }
+        this.setState({
+          items: itemAndKeyArray
+        })
+        console.log(this.state.items)
+      })
 
-      // let itemArray = [];
+      
+  })
+  }
+
+  render() { 
+    return (
+      <div className='wrapper'>
+        <InputNewItem />
+        {
+          this.state.departments.map((singleDept, i) => {
+
+            let itemsArray = [];
+            for (let idKey in singleDept[1]) {
+              const itemIds = [idKey, singleDept[1][idKey]]
+              itemsArray.push(itemIds)
+            }
+
+            console.log(itemsArray)
+
+
+            return (
+              <ul key={i}>
+                <li>
+                  <p>{singleDept[0]}</p>
+                  
+                  {
+                    itemsArray.map((item) => {
+                      return (
+                     
+                          <div key={item[0]}>
+                            
+                            <p>{item[1]}</p>
+                            
+                            <button onClick={ () => { this.removeItem(item[0]) }}>Remove</button>
+
+                          </div>
+                            // {/* <RemoveItem 
+                            //   item={item[1]}
+                            //   remove={ () => { this.removeItem(i) }}
+                            // /> */}
+                       
+                      
+                      )
+                    })
+                  }
+                </li>
+
+
+
+                {/* <ShowList 
+                  dept={singleDept.dept}
+                  items={singleDept.items}
+                /> */}
+
+
+              </ul>
+            )
+          })
+        }
+      </div>
+    )
+  }
+}
+
+export default App;
+
+// let itemArray = [];
       // let deptArray = [];
       // for (let deptKey in firebaseDataObject) {
 
@@ -84,54 +185,3 @@ class App extends Component {
     //   this.setState({
     //     items: itemArray
     // })
-  })
-  }
-
-  render() { 
-      return (
-          <div className='wrapper'>
-            <InputNewItem />
-            {
-              this.state.departments.map((singleDept, i) => {
-                return (
-                  <ul key={i}>
-                    <li>
-                      <p>{singleDept[0]}</p>
-                      {
-                        Object.values(singleDept[1]).map((item, i) => {
-                          return (
-                            <p key={i}>{item}</p>
-                          )
-                        })
-                      }
-                       
-
-                      {/* <p>{singleDept[1]}</p> */}
-                        {/* {
-                          this.state.items.map((singleItem, index) => {
-                            return (
-                              <ul key={index}>
-                                <li>
-                                  <p>{singleItem}</p>
-                                </li>
-                              </ul>
-                            )
-                          })
-                        } */}
-                    </li>
-                    {/* <ShowList 
-                      dept={singleDept.dept}
-                      items={singleDept.items}
-                    /> */}
-                  </ul>
-                  
-                )
-              })
-            }
-            
-          </div>
-      )
-  }
-}
-
-export default App;
