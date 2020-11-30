@@ -10,35 +10,35 @@ class App extends Component {
   constructor() {
     super();
     this.state = { 
+      originalDepartments: [],
       departments: [],
       items: []
     }
   }
 
-  removeItem = (keyOfItemToDelete) => {
+  // removeItem = (keyOfItemToDelete) => {
 
-    console.log(keyOfItemToDelete)
+  //   console.log(keyOfItemToDelete)
 
-    const copyOfItemsArray = [this.state.items]
-    console.log(copyOfItemsArray)
+  //   const copyOfItemsArray = [this.state.items]
+  //   console.log(copyOfItemsArray)
 
-    copyOfItemsArray[0].forEach((itemKey) => {
-      console.log('each key', itemKey)
-      if (itemKey[0] === keyOfItemToDelete) {
-        console.log('yes')
-        const itemsLeft = itemKey.filter((item, index) => {
-          return itemKey === index
-        })
-        console.log('itemsleft', itemsLeft)
-        this.setState({
-          items: itemsLeft
-        })
-      }
-    })
-    
-  }  
+  //   copyOfItemsArray[0].forEach((itemKey) => {
+  //     console.log('each key', itemKey)
+  //     if (itemKey[0] === keyOfItemToDelete) {
+  //       console.log('yes', itemKey[0])
 
-
+  //       const itemsLeft = copyOfItemsArray[0].filter((item, index) => {
+  //         // maybe a for loop?
+  //         return itemKey === index
+  //       })
+  //       console.log('itemsleft', itemsLeft)
+  //       this.setState({
+  //         items: itemsLeft
+  //       })
+  //     }
+  //   })
+  // }  
 
 
 
@@ -57,25 +57,34 @@ class App extends Component {
       // console.log('depo array', deptArray)
 
       this.setState({
-        departments: deptArray
+        departments: deptArray,
+        originalDepartments: deptArray
       })
+
 
       console.log(this.state.departments)
 
-      let itemAndKeyArray = [];
-      this.state.departments.map((singleDept) => {
-        for (let idKey in singleDept[1]) {
-          const itemIds = [idKey, singleDept[1][idKey]]
-          itemAndKeyArray.push(itemIds)
-        }
-        this.setState({
-          items: itemAndKeyArray
-        })
-        console.log(this.state.items)
-      })
+      // let itemAndKeyArray = [];
+      // this.state.departments.map((singleDept) => {
+      //   for (let idKey in singleDept[1]) {
+      //     const itemIds = [idKey, singleDept[1][idKey]]
+      //     itemAndKeyArray.push(itemIds)
+      //   }
+      //   this.setState({
+      //     items: itemAndKeyArray
+      //   })
+      //   console.log(this.state.items)
+      // })
 
       
-  })
+    })
+  }
+
+  removeItemFromDb = (itemKey, dept) => {
+    const dbRef = firebase.database().ref();
+    let deptOrAisle = `/${dept[0]}/`;
+    console.log(dept[0]);
+    dbRef.child( deptOrAisle + itemKey).remove();
   }
 
   render() { 
@@ -84,7 +93,7 @@ class App extends Component {
         <InputNewItem />
         {
           this.state.departments.map((singleDept, i) => {
-
+            let dept = singleDept;
             let itemsArray = [];
             for (let idKey in singleDept[1]) {
               const itemIds = [idKey, singleDept[1][idKey]]
@@ -107,7 +116,7 @@ class App extends Component {
                             
                             <p>{item[1]}</p>
                             
-                            <button onClick={ () => { this.removeItem(item[0]) }}>Remove</button>
+                            <button onClick={ () => { this.removeItemFromDb(item[0], dept) }}>Remove</button>
 
                           </div>
                             // {/* <RemoveItem 
