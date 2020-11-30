@@ -12,35 +12,10 @@ class App extends Component {
     this.state = { 
       originalDepartments: [],
       departments: [],
-      items: []
+      items: [],
+      enterItem: ''
     }
   }
-
-  // removeItem = (keyOfItemToDelete) => {
-
-  //   console.log(keyOfItemToDelete)
-
-  //   const copyOfItemsArray = [this.state.items]
-  //   console.log(copyOfItemsArray)
-
-  //   copyOfItemsArray[0].forEach((itemKey) => {
-  //     console.log('each key', itemKey)
-  //     if (itemKey[0] === keyOfItemToDelete) {
-  //       console.log('yes', itemKey[0])
-
-  //       const itemsLeft = copyOfItemsArray[0].filter((item, index) => {
-  //         // maybe a for loop?
-  //         return itemKey === index
-  //       })
-  //       console.log('itemsleft', itemsLeft)
-  //       this.setState({
-  //         items: itemsLeft
-  //       })
-  //     }
-  //   })
-  // }  
-
-
 
   // connect to Firebase and get existing and updated data from the database
   componentDidMount() {
@@ -49,48 +24,57 @@ class App extends Component {
     const dbRef = firebase.database().ref();
 
     dbRef.on('value', (data) => {
+
       const firebaseDataObject = data.val();
 
-      // console.log(firebaseDataObject);
-      let deptArray = Object.keys(firebaseDataObject).map((key) => [(key), firebaseDataObject[key]]);
-
-      // console.log('depo array', deptArray)
+      if (firebaseDataObject === null) {
+        this.setState({
+          enterItem: 'Enter an item to your list'
+        }) 
+      } else {
+        let deptArray = Object.keys(firebaseDataObject).map((key) => [(key), firebaseDataObject[key]]);
 
       this.setState({
         departments: deptArray,
-        originalDepartments: deptArray
+        enterItem: ''
       })
+      }      
+    })
+  }
+  
+  removeItemFromDb = (itemKey, dept) => {
+    const dbRef = firebase.database().ref();
+    let deptOrAisle = `/${dept[0]}/`;
 
+    dbRef.child( deptOrAisle + itemKey).remove();
 
-      console.log(this.state.departments)
+    dbRef.on('value', (data) => {
+      const firebaseDataObject = data.val();
 
-      // let itemAndKeyArray = [];
-      // this.state.departments.map((singleDept) => {
-      //   for (let idKey in singleDept[1]) {
-      //     const itemIds = [idKey, singleDept[1][idKey]]
-      //     itemAndKeyArray.push(itemIds)
-      //   }
-      //   this.setState({
-      //     items: itemAndKeyArray
-      //   })
-      //   console.log(this.state.items)
-      // })
+      if (firebaseDataObject === null) {
+        this.setState({
+        departments: []
+      })
+      }
 
       
     })
   }
 
-  removeItemFromDb = (itemKey, dept) => {
-    const dbRef = firebase.database().ref();
-    let deptOrAisle = `/${dept[0]}/`;
-    console.log(dept[0]);
-    dbRef.child( deptOrAisle + itemKey).remove();
-  }
+
+  // handleReload = (e) => {
+  //   e.preventDefault();
+  //   const dbRef = firebase.database().ref();
+  //   dbRef.set(this.state.originalDepartments);
+  // }
 
   render() { 
     return (
       <div className='wrapper'>
         <InputNewItem />
+        <h2>{this.state.enterItem}</h2>
+
+        {/* <button onClick={this.handleReload}>Load prior list</button> */}
         {
           this.state.departments.map((singleDept, i) => {
             let dept = singleDept;
