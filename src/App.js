@@ -34,7 +34,7 @@ class App extends Component {
         let deptArray = Object.keys(firebaseDataObject).map((key) => {
           return [(key), firebaseDataObject[key]];
         })
-        console.log('componentDidMount', deptArray)
+        // console.log('componentDidMount', deptArray)
         this.setState({
           departments: deptArray,
           enterItem: ''
@@ -76,7 +76,7 @@ class App extends Component {
     const dbRef = firebase.database().ref();
     let deptOrAisle = `/${dept[0]}/`;
 
-    console.log(itemKey)
+    // console.log(itemKey)
 
     dbRef.child(deptOrAisle + itemKey).remove();
 
@@ -91,27 +91,46 @@ class App extends Component {
     })
   }
 
-  markCompleted = (itemKey, dept) => {
+  markCompleted = (itemKey, dept, bool) => {
+
+    console.log('dept', dept);
+    console.log('itemkey', itemKey)
+    console.log('bool', bool)
+
+    const pathToTrue = dept[1];
+    console.log('path', pathToTrue);
+    // console.log(pathToTrue.itemKey[0])
+
     const dbRef = firebase.database().ref();
     let completePath = `/${dept[0]}/${itemKey}/`;
+
     
-    // this.state.departments.map((singleDept, i) => {
-    //         let dept = singleDept;
-    //         let itemsArray = [];
-    //         let completed = []
-    //         for (let idKey in singleDept[1]) {
-    //           const itemIds = [idKey, singleDept[1][idKey]]
-    //           itemsArray.push(itemIds)
-    //           completed.push(singleDept[1][idKey][0])
-    //           console.log('single1', completed)
-    //         } 
-    //       })
-
-    dbRef.child(completePath).update({0: true});
+      if (bool === false) {
+        dbRef.child(completePath).update({0: true});
+      } else {
+        dbRef.child(completePath).update({0: false});
+      }
+    
 
 
-    // console.log('dept', dept);
-    // console.log('itemkey', itemKey)
+    
+    // this.state.departments.map((singleDept, index) => {
+    //   let dept = singleDept;
+    //   let itemsArray = [];
+    //   let completed = []
+    //   for (let idKey in singleDept[1]) {
+    //     const itemIds = [idKey, singleDept[1][idKey]]
+    //     itemsArray.push(itemIds)
+    //     completed.push(singleDept[1][idKey][0])
+    //     console.log('single1', completed)
+    //   } 
+    // })
+    
+    // if (completed =)
+    // dbRef.child(completePath).update({0: true});
+
+
+  
   }
 
   updateItem = (e, dept) => {
@@ -141,10 +160,10 @@ class App extends Component {
               const itemIds = [idKey, singleDept[1][idKey]]
               itemsArray.push(itemIds)
               completed.push(singleDept[1][idKey][0])
-              console.log('single1', completed)
+              // console.log('single1', completed)
             } 
 
-            console.log(completed)
+            // console.log(completed)
             return (
               <div key={i}>
                 <ul>
@@ -153,9 +172,12 @@ class App extends Component {
                   
                     {
                       itemsArray.map((item, index) => {
+
+                        console.log('iarray', itemsArray)
+                        console.log('truepath', item[1][0])
     
-                        console.log('ITEM', item[1])
-                        console.log('INDEX', completed[index])
+                        // console.log('ITEM', item[1])
+                        // console.log('INDEX', completed[index])
                         return (
                           <div key={item[0]}>
                             {
@@ -169,7 +191,7 @@ class App extends Component {
                             
                             <button onClick={ () => { this.removeItemFromDb(item[0], dept) }}>Remove</button>
 
-                            <button onClick={ () => { this.markCompleted(item[0], dept) } }>Complete</button>
+                            <button onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) } }>Complete</button>
                           </div>
                         )
                       })
