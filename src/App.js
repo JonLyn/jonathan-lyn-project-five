@@ -64,6 +64,12 @@ class App extends Component {
   markCompleted = (itemKey, dept) => {
     const dbRef = firebase.database().ref();
     let completePath = `/${dept[0]}/${itemKey}/`;
+    dbRef.child(completePath).update({0: true});
+  }
+
+  updateItem = (itemKey, dept) => {
+    const dbRef = firebase.database().ref();
+    let completePath = `/${dept[0]}/${itemKey}/`;
 
     dbRef.child(completePath).update({0: true});
 
