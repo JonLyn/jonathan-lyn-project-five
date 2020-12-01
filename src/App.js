@@ -10,12 +10,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = { 
-      originalDepartments: [],
       departments: [],
-      items: [],
-      enterItem: ''
+      enterItem: '',
+      newDept: ''
     }
   }
+
+  
 
   // connect to Firebase and get existing and updated data from the database
   componentDidMount() {
@@ -38,8 +39,32 @@ class App extends Component {
           departments: deptArray,
           enterItem: ''
         })
-      }      
+      }
+      
+      const objects = this.state.departments[1][1]
+      console.log('OG', this.state.departments)
+      console.log('objects', objects)
+
+      const objectsArray = Object.values(objects).forEach((itemArray) => {
+        if (itemArray[0] === true) {
+          console.log('true')
+        }
+      })
+      console.log(objectsArray)
+
+      // for (let key in objects) {
+      //   console.log('KEY', key)
+
+      //   if (key[0] === true) {
+      //     console.log('TRUE')
+      //   }
+      // }
+
+      // if (this.state.departments[1] === true) {
+      //   console.log('true')
+      // }
     })
+
   }
 
   removeItemFromDb = (itemKey, dept) => {
@@ -65,13 +90,19 @@ class App extends Component {
     const dbRef = firebase.database().ref();
     let completePath = `/${dept[0]}/${itemKey}/`;
     dbRef.child(completePath).update({0: true});
+    console.log('dept', dept);
+    console.log('itemkey', itemKey)
   }
 
-  updateItem = (itemKey, dept) => {
+  updateItem = (e, dept) => {
+    this.setState({
+      newDept: e.target.value
+    })
     const dbRef = firebase.database().ref();
-    let completePath = `/${dept[0]}/${itemKey}/`;
+    // let completePath = `/${dept[0]}/${itemKey}/`;
+    const newDepartment = this.state.newDept
 
-    dbRef.child(completePath).update({0: true});
+    dbRef.child(dept).update({newDepartment});
 
   }
 
@@ -97,6 +128,7 @@ class App extends Component {
 
 
             return (
+              
               <ul key={i}>
                 <li>
                   <p>{singleDept[0]}</p>
@@ -104,21 +136,34 @@ class App extends Component {
                   {
                     itemsArray.map((item) => {
                       return (
-                     
+                    
                           <div key={item[0]}>
-                            
-                            <p>{item[1]}</p>
+                            {/* {item  ?
+                              
+                              
+                            }
+                             */}
+                            <p className="item">{item[1]}</p>
                             
                             <button onClick={ () => { this.removeItemFromDb(item[0], dept) }}>Remove</button>
 
                             <button onClick={ () => { this.markCompleted(item[0], dept) } }>Complete</button>
+
+                            <label htmlFor="location"> Department or aisle: </label>
+                            <select name="location" id="location" onChange={ (e) => {this.updateItem(e, dept)} }>
+                                <option value="Unknown">Unknown</option>
+                                <option value="Deli">Deli</option>
+                                <option value="Meat">Meat</option>
+                                <option value="Produce">Produce</option>
+                                <option value="Seafood">Seafood</option>
+                            </select>
 
                           </div>
                             // {/* <RemoveItem 
                             //   item={item[1]}
                             //   remove={ () => { this.removeItem(i) }}
                             // /> */}
-                       
+                      
                       
                       )
                     })

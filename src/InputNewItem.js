@@ -10,7 +10,7 @@ class InputNewItem extends Component {
         this.state = {
             userInput: '',
             dept: 'Unknown',
-            itemNotComplete: []
+            // itemNotComplete: []
         }
     }
 
