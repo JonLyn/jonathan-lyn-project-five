@@ -1,7 +1,5 @@
 import { Component } from 'react';
 import firebase from './firebase.js';
-import App from './App.js';
-
 
 class InputNewItem extends Component {
 
@@ -9,8 +7,7 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: 'Unknown',
-            // itemNotComplete: []
+            dept: 'Unknown'
         }
     }
 
@@ -26,21 +23,12 @@ class InputNewItem extends Component {
         })
     }
 
-    
-
     handleSubmit = (e) => {
         e.preventDefault();
-
         let inputted = this.state.userInput
-
         let itemNotCompletedArray = [false, inputted]
-
         const dbRef = firebase.database().ref();
         dbRef.child(this.state.dept).push(itemNotCompletedArray);
-
-       
-
-
         this.setState({
             userInput: ''
         })
@@ -69,4 +57,5 @@ class InputNewItem extends Component {
         )
     }
 }
+
 export default InputNewItem;
