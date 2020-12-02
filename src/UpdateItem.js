@@ -6,7 +6,7 @@ class UpdateItem extends Component {
     constructor() {
         super()
         this.state = {
-            itemToEdit: [],
+            itemToEdit: '',
             newDept: 'Unknown'
         }
     }
@@ -14,11 +14,13 @@ class UpdateItem extends Component {
 
     handleDeptUpdate = (e) => {
         const { item } = this.props;
+        let updatedItem = Object.values({ item })
         this.setState({
             newDept: e.target.value,
-            itemToEdit: Object.values({ item })
+            itemToEdit: updatedItem[0]
         })
-        console.log({ item })
+        console.log('values', Object.values({ item }))
+        console.log(updatedItem[0])
         console.log(this.state.itemToEdit)
     }
 
