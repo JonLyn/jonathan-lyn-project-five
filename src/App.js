@@ -100,10 +100,10 @@ class App extends Component {
                               <ToggleComplete 
                                 toggle={ () => { 
                                   this.markCompleted(item[0], dept, item[1][0]) 
-                                  console.log(dept[1])
-                                  console.log(Object.keys(dept[1]))
-                                  console.log('itemkey', item[0])
-                                  console.log('dept', dept)
+                                  // console.log(dept[1])
+                                  // console.log(Object.keys(dept[1]))
+                                  // console.log('itemkey', item[0])
+                                  // console.log('dept', dept)
                                 }}
                               />
                               <UpdateItem

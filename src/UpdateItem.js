@@ -8,8 +8,20 @@ class UpdateItem extends Component {
         this.state = {
             itemToEdit: '',
             newDept: 'Unknown',
-            oldDept: ''
+            showDropdown: false
         }
+    }
+
+    handleShowDropdown = (e) => {
+        e.preventDefault();
+        const { item } = this.props;
+        let updatedItem = Object.values({ item })
+        let showDropdownBool = this.state.showDropdown
+        this.setState({
+            itemToEdit: updatedItem[0],
+            showDropdown: !showDropdownBool
+        })
+        console.log(showDropdownBool)
     }
 
 
@@ -18,7 +30,7 @@ class UpdateItem extends Component {
         let updatedItem = Object.values({ item })
         this.setState({
             newDept: e.target.value,
-            itemToEdit: updatedItem[0]
+            // itemToEdit: updatedItem[0]
         })
         // console.log('values', Object.values({ item }))
         // console.log(updatedItem[0])
@@ -26,7 +38,6 @@ class UpdateItem extends Component {
     }
 
     handleUpdateSubmit = (e) => {
-        // const { dept, itemKey } = this.props
         let deletePath = `/${this.props.dept}/${this.props.itemKey}/`
         e.preventDefault();
         let newInputted = this.state.itemToEdit
@@ -34,14 +45,19 @@ class UpdateItem extends Component {
         const dbRef = firebase.database().ref();
         dbRef.child(this.state.newDept).push(updatedItemNotCompletedArray)
         dbRef.child(deletePath).remove()
-
     }
+
 
     render() { 
         return (
-            <form>
+            <div>
+            <button onClick={this.handleShowDropdown}>Edit</button>
+            {
+                (this.state.showDropdown)
+                ? <form>
                 <label htmlFor="location"> Change location: </label>
                 <select name="location" id="location" onChange={this.handleDeptUpdate}>
+                    {/* <option value="">Change</option> */}
                     <option value="Unknown">Unknown</option>
                     <option value="Deli">Deli</option>
                     <option value="Meat">Meat</option>
@@ -50,6 +66,10 @@ class UpdateItem extends Component {
                 </select>
                 <button onClick={this.handleUpdateSubmit}>Save</button>      
             </form>
+            : null
+            }
+            
+            </div>
         )
     }
 }
