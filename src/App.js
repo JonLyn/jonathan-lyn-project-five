@@ -3,7 +3,7 @@ import { Component } from 'react';
 import firebase from './firebase.js';
 import InputNewItem from './InputNewItem.js';
 // import ShowList from './ShowList.js';
-// import RemoveItem from './RemoveItem.js'
+import RemoveItem from './RemoveItem.js'
 
 class App extends Component {
 
@@ -15,8 +15,6 @@ class App extends Component {
       newDept: ''
     }
   }
-
-  
 
   // connect to Firebase and get existing and updated data from the database
   componentDidMount() {
@@ -40,34 +38,6 @@ class App extends Component {
           enterItem: ''
         })
       }
-      
-      // const objects = this.state.departments[1][1]
-      // console.log('OG', this.state.departments)
-      // console.log('objects', objects)
-
-      // this.state.departments.forEach((deptArray) => {
-      //   Object.values(objects).forEach((itemArray) => {
-      //   if (itemArray[0] === true) {
-          // return ['yes']
-          // console.log(itemArray[0])
-          // console.log('true')
-        // }
-      // })
-      // })
-     
-      // console.log(objectsArray)
-
-      // for (let key in objects) {
-      //   console.log('KEY', key)
-
-      //   if (key[0] === true) {
-      //     console.log('TRUE')
-      //   }
-      // }
-
-      // if (this.state.departments[1] === true) {
-      //   console.log('true')
-      // }
     })
 
   }
@@ -75,14 +45,9 @@ class App extends Component {
   removeItemFromDb = (itemKey, dept) => {
     const dbRef = firebase.database().ref();
     let deptOrAisle = `/${dept[0]}/`;
-
-    // console.log(itemKey)
-
     dbRef.child(deptOrAisle + itemKey).remove();
-
     dbRef.on('value', (data) => {
       const firebaseDataObject = data.val();
-
       if (firebaseDataObject === null) {
         this.setState({
         departments: []
@@ -92,58 +57,28 @@ class App extends Component {
   }
 
   markCompleted = (itemKey, dept, bool) => {
-
-    console.log('dept', dept);
-    console.log('itemkey', itemKey)
-    console.log('bool', bool)
-
-    const pathToTrue = dept[1];
-    console.log('path', pathToTrue);
-    // console.log(pathToTrue.itemKey[0])
-
+    // console.log('dept', dept);
+    // console.log('itemkey', itemKey);
+    // console.log('bool', bool);
     const dbRef = firebase.database().ref();
     let completePath = `/${dept[0]}/${itemKey}/`;
-
-    
-      if (bool === false) {
-        dbRef.child(completePath).update({0: true});
-      } else {
-        dbRef.child(completePath).update({0: false});
-      }
-    
-
-
-    
-    // this.state.departments.map((singleDept, index) => {
-    //   let dept = singleDept;
-    //   let itemsArray = [];
-    //   let completed = []
-    //   for (let idKey in singleDept[1]) {
-    //     const itemIds = [idKey, singleDept[1][idKey]]
-    //     itemsArray.push(itemIds)
-    //     completed.push(singleDept[1][idKey][0])
-    //     console.log('single1', completed)
-    //   } 
-    // })
-    
-    // if (completed =)
-    // dbRef.child(completePath).update({0: true});
-
-
-  
+    if (bool === false) {
+      dbRef.child(completePath).update({0: true});
+    } else {
+      dbRef.child(completePath).update({0: false});
+    }
   }
 
-  updateItem = (e, dept) => {
-    this.setState({
-      newDept: e.target.value
-    })
-    const dbRef = firebase.database().ref();
-    // let completePath = `/${dept[0]}/${itemKey}/`;
-    const newDepartment = this.state.newDept
+  // updateItem = (e, dept) => {
+  //   this.setState({
+  //     newDept: e.target.value
+  //   })
+  //   const dbRef = firebase.database().ref();
+  //   // let completePath = `/${dept[0]}/${itemKey}/`;
+  //   const newDepartment = this.state.newDept
 
-    dbRef.child(dept).update({newDepartment});
-
-  }
+  //   dbRef.child(dept).update({newDepartment});
+  // }
 
   render() { 
     return (
@@ -185,11 +120,22 @@ class App extends Component {
                               ? <p className="item">{item[1]}</p>
                               : <p>test</p>
 
-                            }
+                            } 
 
                             {/* <p className="item">{item[1]}</p> */}
+
+                            <RemoveItem         
+                            // keyname={item[0]}
+                            // departments={dept}
+                            remove={ () => {
+                              this.removeItemFromDb(item[0], dept) 
+                            }}
+                            />
                             
-                            <button onClick={ () => { this.removeItemFromDb(item[0], dept) }}>Remove</button>
+                            {/* <button onClick={ () => { this.removeItemFromDb(item[0], dept) }}>Remove</button> */}
+
+
+
 
                             <button onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) } }>Complete</button>
                           </div>

@@ -1,11 +1,7 @@
-const removeItem = (props) => {
+const RemoveItem = ({ remove }) => {
+        return (
+            <button onClick={ remove }>Remove</button>
+        )
+    }
 
-    
-
-    return (
-        <button onClick={props.remove}>Remove</button>
-    )
-}
-
-
-export default removeItem;
+export default RemoveItem;
