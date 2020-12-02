@@ -7,7 +7,7 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: 'Unknown',
+            dept: 'Unknown'
         }
     }
 

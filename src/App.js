@@ -5,6 +5,7 @@ import InputNewItem from './InputNewItem.js';
 // import ShowList from './ShowList.js';
 import RemoveItem from './RemoveItem.js'
 import ToggleComplete from './ToggleComplete.js';
+import UpdateItem from './UpdateItem.js'
 
 class App extends Component {
 
@@ -20,11 +21,8 @@ class App extends Component {
   // connect to Firebase and get existing and updated data from the database
   componentDidMount() {
     const dbRef = firebase.database().ref();
-
     dbRef.on('value', (data) => {
-
       const firebaseDataObject = data.val();
-
       if (firebaseDataObject === null) {
         this.setState({
           enterItem: 'Enter an item to your list'
@@ -33,14 +31,12 @@ class App extends Component {
         let deptArray = Object.keys(firebaseDataObject).map((key) => {
           return [(key), firebaseDataObject[key]];
         })
-        // console.log('componentDidMount', deptArray)
         this.setState({
           departments: deptArray,
           enterItem: ''
         })
       }
     })
-
   }
 
   removeItemFromDb = (itemKey, dept) => {
@@ -58,9 +54,6 @@ class App extends Component {
   }
 
   markCompleted = (itemKey, dept, bool) => {
-    // console.log('dept', dept);
-    // console.log('itemkey', itemKey);
-    // console.log('bool', bool);
     const dbRef = firebase.database().ref();
     let completePath = `/${dept[0]}/${itemKey}/`;
     if (bool === false) {
@@ -70,67 +63,55 @@ class App extends Component {
     }
   }
 
-  // updateItem = (e, dept) => {
-  //   this.setState({
-  //     newDept: e.target.value
-  //   })
-  //   const dbRef = firebase.database().ref();
-  //   // let completePath = `/${dept[0]}/${itemKey}/`;
-  //   const newDepartment = this.state.newDept
-
-  //   dbRef.child(dept).update({newDepartment});
-  // }
-
   render() { 
     return (
       <div className='wrapper'>
         <InputNewItem />
         <h2>{this.state.enterItem}</h2>
-
         {
           this.state.departments.map((singleDept, i) => {
             let dept = singleDept;
             let itemsArray = [];
             let completed = []
             for (let idKey in singleDept[1]) {
-              const itemIds = [idKey, singleDept[1][idKey]]
-              itemsArray.push(itemIds)
-              completed.push(singleDept[1][idKey][0])
-              // console.log('single1', completed)
+              const itemIds = [idKey, singleDept[1][idKey]];
+              itemsArray.push(itemIds);
+              completed.push(singleDept[1][idKey][0]);
             } 
-
-            // console.log(completed)
             return (
               <div key={i}>
                 <ul>
                   <li>
                     <p>{singleDept[0]}</p>
-                  
-                    {
-                      itemsArray.map((item, index) => {
-                        return (
-                          <div key={item[0]}>
-                            {
-                              (completed[index])
-                              ? <p className="item">{item[1]}</p>
-                              : <p>test</p>
-                            } 
-
-                            <RemoveItem         
-                              remove={ () => {
-                                this.removeItemFromDb(item[0], dept) 
-                              }}
-                            />
-                            
-                            <ToggleComplete 
-                              toggle={ () => { 
-                                this.markCompleted(item[0], dept, item[1][0]) 
-                              }}
-                            />
-                          </div>
-                        )
-                      })
-                    }
+                      {
+                        itemsArray.map((item, index) => {
+                          return (
+                            <div key={item[0]}>
+                              {
+                                (completed[index])
+                                ? <p>test</p>
+                                : <p className="item">{item[1]}</p>
+                              } 
+                              <RemoveItem         
+                                remove={ () => {
+                                  this.removeItemFromDb(item[0], dept) 
+                                }}
+                              />
+                              <ToggleComplete 
+                                toggle={ () => { 
+                                  this.markCompleted(item[0], dept, item[1][0]) 
+                                }}
+                              />
+                              <UpdateItem
+                                item={item[1][1]} 
+                                // edit={ () => {
+                                //   this.updateItem(item[1], dept)
+                                // }}
+                              />
+                            </div>
+                          )
+                        })
+                      }
                   </li>
                 </ul>
               </div>
