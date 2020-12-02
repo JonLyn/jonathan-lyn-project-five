@@ -7,7 +7,8 @@ class UpdateItem extends Component {
         super()
         this.state = {
             itemToEdit: '',
-            newDept: 'Unknown'
+            newDept: 'Unknown',
+            oldDept: ''
         }
     }
 
@@ -19,25 +20,27 @@ class UpdateItem extends Component {
             newDept: e.target.value,
             itemToEdit: updatedItem[0]
         })
-        console.log('values', Object.values({ item }))
-        console.log(updatedItem[0])
-        console.log(this.state.itemToEdit)
+        // console.log('values', Object.values({ item }))
+        // console.log(updatedItem[0])
+        // console.log(this.state.itemToEdit)
     }
 
     handleUpdateSubmit = (e) => {
+        // const { dept, itemKey } = this.props
+        let deletePath = `/${this.props.dept}/${this.props.itemKey}/`
         e.preventDefault();
         let newInputted = this.state.itemToEdit
         let updatedItemNotCompletedArray = [false, newInputted]
         const dbRef = firebase.database().ref();
         dbRef.child(this.state.newDept).push(updatedItemNotCompletedArray)
+        dbRef.child(deletePath).remove()
+
     }
 
     render() { 
-        // const { item } = this.props;
-        // console.log('itemprop', { item })
         return (
             <form>
-                <label htmlFor="location"> Department or aisle: </label>
+                <label htmlFor="location"> Change location: </label>
                 <select name="location" id="location" onChange={this.handleDeptUpdate}>
                     <option value="Unknown">Unknown</option>
                     <option value="Deli">Deli</option>
