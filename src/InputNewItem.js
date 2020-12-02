@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import firebase from './firebase.js';
-// import App from './App.js';
 
 class InputNewItem extends Component {
 

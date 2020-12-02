@@ -4,6 +4,7 @@ import firebase from './firebase.js';
 import InputNewItem from './InputNewItem.js';
 // import ShowList from './ShowList.js';
 import RemoveItem from './RemoveItem.js'
+import ToggleComplete from './ToggleComplete.js';
 
 class App extends Component {
 
@@ -107,37 +108,25 @@ class App extends Component {
                   
                     {
                       itemsArray.map((item, index) => {
-
-                        console.log('iarray', itemsArray)
-                        console.log('truepath', item[1][0])
-    
-                        // console.log('ITEM', item[1])
-                        // console.log('INDEX', completed[index])
                         return (
                           <div key={item[0]}>
                             {
                               (completed[index])
                               ? <p className="item">{item[1]}</p>
                               : <p>test</p>
-
                             } 
 
-                            {/* <p className="item">{item[1]}</p> */}
-
                             <RemoveItem         
-                            // keyname={item[0]}
-                            // departments={dept}
-                            remove={ () => {
-                              this.removeItemFromDb(item[0], dept) 
-                            }}
+                              remove={ () => {
+                                this.removeItemFromDb(item[0], dept) 
+                              }}
                             />
                             
-                            {/* <button onClick={ () => { this.removeItemFromDb(item[0], dept) }}>Remove</button> */}
-
-
-
-
-                            <button onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) } }>Complete</button>
+                            <ToggleComplete 
+                              toggle={ () => { 
+                                this.markCompleted(item[0], dept, item[1][0]) 
+                              }}
+                            />
                           </div>
                         )
                       })
