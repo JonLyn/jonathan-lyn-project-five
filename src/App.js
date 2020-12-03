@@ -4,8 +4,15 @@ import firebase from './firebase.js';
 import InputNewItem from './InputNewItem.js';
 // import ShowList from './ShowList.js';
 import RemoveItem from './RemoveItem.js'
-import ToggleComplete from './ToggleComplete.js';
+// import ToggleComplete from './ToggleComplete.js';
 import UpdateItem from './UpdateItem.js'
+
+// import ReactDOM from 'react-dom'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPenSquare, faSave, faTrashAlt, faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+library.add(faPenSquare, faSave, faTrashAlt, faCheckSquare, faSquare)
 
 class App extends Component {
 
@@ -86,32 +93,28 @@ class App extends Component {
                       {
                         itemsArray.map((item, index) => {
                           return (
-                            <div key={item[0]}>
-                              {
-                                (completed[index])
-                                ? <p>test</p>
-                                : <p className="item">{item[1]}</p>
-                              } 
+                            <ul key={item[0]}>
+                              <li>
+                                <div onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
+                                  <FontAwesomeIcon icon={ (completed[index]) ? "check-square" : "square" }/>
+                                    <p className={ (completed[index]) ? "done" : "notDone" }>
+                                      {item[1]}
+                                    </p>
+                                </div>
+                            
                               <RemoveItem         
                                 remove={ () => {
                                   this.removeItemFromDb(item[0], dept) 
                                 }}
                               />
-                              <ToggleComplete 
-                                toggle={ () => { 
-                                  this.markCompleted(item[0], dept, item[1][0]) 
-                                  // console.log(dept[1])
-                                  // console.log(Object.keys(dept[1]))
-                                  // console.log('itemkey', item[0])
-                                  // console.log('dept', dept)
-                                }}
-                              />
+                            
                               <UpdateItem
                                 item={item[1][1]}
                                 itemKey={item[0]} 
                                 dept={dept[0]}
                               />
-                            </div>
+                                </li>
+                              </ul>
                           )
                         })
                       }
@@ -127,6 +130,11 @@ class App extends Component {
 }
 
 export default App;
+
+          // console.log(dept[1])
+                                // console.log(Object.keys(dept[1]))
+                                // console.log('itemkey', item[0])
+                                // console.log('dept', dept)
 
 
 
@@ -176,3 +184,15 @@ export default App;
                 //                   <option value="Produce">Produce</option>
                 //                   <option value="Seafood">Seafood</option>
                 //               </select>
+
+                    {/* <ToggleComplete 
+                                  // onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) } }
+                                  // toggle={ () => { this.markCompleted(item[0], dept, item[1][0]) }}  
+                                  // completedIndexArray={completed[index]}
+                                  // item={item[1]}
+                                  /> */}
+                              {/* {
+                                (completed[index])
+                                ? <p className="done">{item[1]}</p>
+                                : <p className="notDone">{item[1]}</p>
+                              }  */}

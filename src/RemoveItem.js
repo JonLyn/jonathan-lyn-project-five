@@ -1,6 +1,8 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const RemoveItem = ({ remove }) => {
         return (
-            <button onClick={ remove }>Remove</button>
+            <p><FontAwesomeIcon onClick={ remove } icon="trash-alt"/></p>
         )
     }
 

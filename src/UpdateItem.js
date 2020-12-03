@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import firebase from "./firebase.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class UpdateItem extends Component {
 
@@ -51,24 +52,24 @@ class UpdateItem extends Component {
     render() { 
         return (
             <div>
-            <button onClick={this.handleShowDropdown}>Edit</button>
-            {
-                (this.state.showDropdown)
-                ? <form>
-                <label htmlFor="location"> Change location: </label>
-                <select name="location" id="location" onChange={this.handleDeptUpdate}>
-                    {/* <option value="">Change</option> */}
-                    <option value="Unknown">Unknown</option>
-                    <option value="Deli">Deli</option>
-                    <option value="Meat">Meat</option>
-                    <option value="Produce">Produce</option>
-                    <option value="Seafood">Seafood</option>
-                </select>
-                <button onClick={this.handleUpdateSubmit}>Save</button>      
-            </form>
-            : null
-            }
-            
+                <FontAwesomeIcon onClick={this.handleShowDropdown} icon="pen-square" className="edit"/>
+                {/* <button onClick={this.handleShowDropdown}>Edit</button> */}
+                {
+                    (this.state.showDropdown)
+                    ? <form>
+                    <label htmlFor="location"> Change location: </label>
+                    <select name="location" id="location" onChange={this.handleDeptUpdate}>
+                        {/* <option value="">Change</option> */}
+                        <option value="Unknown">Unknown</option>
+                        <option value="Deli">Deli</option>
+                        <option value="Meat">Meat</option>
+                        <option value="Produce">Produce</option>
+                        <option value="Seafood">Seafood</option>
+                    </select>
+                    <FontAwesomeIcon onClick={this.handleUpdateSubmit} icon="save" className="save"/>      
+                </form>
+                : null
+                }
             </div>
         )
     }
