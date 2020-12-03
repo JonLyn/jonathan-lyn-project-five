@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import firebase from './firebase.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DepartmentList from './DepartmentList.js';
 
 class InputNewItem extends Component {
 
@@ -9,7 +10,6 @@ class InputNewItem extends Component {
         this.state = {
             userInput: '',
             dept: 'Unknown',
-            // valueInput: '' 
         }
     }
 
@@ -38,7 +38,7 @@ class InputNewItem extends Component {
 
     render() { 
         return (
-            <form>
+            <form onSubmit={(this.state.userInput !== '') ? this.handleSubmit : null} >
                 <label htmlFor="newItem">Enter item: </label>
                 <input 
                     type="text"
@@ -48,23 +48,16 @@ class InputNewItem extends Component {
                     placeholder="Please enter an item"
                     required
                 />
-                {/* {
-                    (this.state.userInput === '') 
-                    ? 
-                } */}
-                <label htmlFor="location"> Department or aisle: </label>
+                <label htmlFor="location"> Dept / aisle: </label>
                 <select name="location" id="location" onChange={this.handleDeptChange}>
-                    <option value="Unknown">Unknown</option>
-                    <option value="Deli">Deli</option>
-                    <option value="Meat">Meat</option>
-                    <option value="Produce">Produce</option>
-                    <option value="Seafood">Seafood</option>
+                    <DepartmentList />
                 </select>
-                {/* <button onClick={this.handleSubmit}>Add</button> */}
-                <FontAwesomeIcon onClick={(this.state.userInput !== '') ? this.handleSubmit : null}    icon={["far", "plus-square"]} type="submit"
-                // disabled={!this.state.valueInput}
-                // {(this.state.userInput === '') ? disabled : 'Please enter an item'}
-                />      
+                <button>
+                    <FontAwesomeIcon      
+                        icon={["far", "plus-square"]} 
+                        type="submit" 
+                    />      
+                </button>
             </form>
         )
     }

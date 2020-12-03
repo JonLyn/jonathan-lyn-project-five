@@ -1,0 +1,46 @@
+body {
+    background-color: $background;
+    color: $text;
+    font-family: $primaryFont;
+    font-size: 1.6rem;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+// Remove default styling
+*,
+h1,
+h2,
+h3,
+figure,
+button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border: none;
+    text-decoration: none;
+}
+
+// img {
+//     width: 100%;
+// }
+
+// Wrapper to center and constrain content
+.wrapper {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    // margin-top: 30px;
+}
+
+h1 {
+    text-align: center;
+    background-color: $primary;
+}
+
+ul {
+    list-style: none;
+}
+

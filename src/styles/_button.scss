@@ -1,9 +1,14 @@
 button {
-    color: red;
+    color: black;
+    background-color: grey;
+    font-size: 20px;
+    position: relative;
+    top: 3px;
 }
 
 .done {
     color: red;
+
     
 }
 
@@ -13,5 +18,14 @@ button {
 }
 
 .item {
-    display: flex
+    display: flex;
+    width: 20%;
+}
+
+body {
+    background-color: grey;
+}
+
+p {
+    margin: 0;
 }

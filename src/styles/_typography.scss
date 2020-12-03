@@ -1,0 +1,16 @@
+
+@font-face{ 
+	font-family: 'fofbb-ital';
+	// src: url('WebFont.eot');
+	// src: url('WebFont.eot?#iefix') format('embedded-opentype'),
+	src:     url('../feast-of-flesh/fofbb_ital-webfont.woff') format('woff')
+	    //  url('WebFont.ttf') format('truetype'),
+	    //  url('WebFont.svg#webfont') format('svg');
+}
+
+// fonts
+
+$primaryFont: 'fofbb-ital', sans-serif;
+$secondaryFont: 'Nerko One', cursive;
+$accentFont: 'East Sea Dokdo', cursive;
+
