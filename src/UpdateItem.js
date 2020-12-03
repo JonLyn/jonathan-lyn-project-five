@@ -52,7 +52,7 @@ class UpdateItem extends Component {
     render() { 
         return (
             <div>
-                <FontAwesomeIcon onClick={this.handleShowDropdown} icon="pen-square" className="edit"/>
+                <FontAwesomeIcon onClick={this.handleShowDropdown} icon= {["far", "edit"]} className="edit"/>
                 {/* <button onClick={this.handleShowDropdown}>Edit</button> */}
                 {
                     (this.state.showDropdown)
@@ -66,7 +66,7 @@ class UpdateItem extends Component {
                         <option value="Produce">Produce</option>
                         <option value="Seafood">Seafood</option>
                     </select>
-                    <FontAwesomeIcon onClick={this.handleUpdateSubmit} icon="save" className="save"/>      
+                    <FontAwesomeIcon onClick={this.handleUpdateSubmit} icon={["far", "save"]} className="save"/>      
                 </form>
                 : null
                 }

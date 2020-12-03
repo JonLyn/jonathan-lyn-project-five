@@ -4,8 +4,14 @@ button {
 
 .done {
     color: red;
+    
 }
 
 .notDone {
-    color: green
+    color: black;
+    
+}
+
+.item {
+    display: flex
 }

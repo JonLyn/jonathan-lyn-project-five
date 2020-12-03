@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import firebase from './firebase.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class InputNewItem extends Component {
 
@@ -7,7 +8,8 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: 'Unknown'
+            dept: 'Unknown',
+            // valueInput: '' 
         }
     }
 
@@ -37,13 +39,19 @@ class InputNewItem extends Component {
     render() { 
         return (
             <form>
-                <label htmlFor="newItem">Enter new item to list: </label>
+                <label htmlFor="newItem">Enter item: </label>
                 <input 
                     type="text"
                     id='newItem'
                     value={this.state.userInput}
                     onChange={this.handleInputChange}
+                    placeholder="Please enter an item"
+                    required
                 />
+                {/* {
+                    (this.state.userInput === '') 
+                    ? 
+                } */}
                 <label htmlFor="location"> Department or aisle: </label>
                 <select name="location" id="location" onChange={this.handleDeptChange}>
                     <option value="Unknown">Unknown</option>
@@ -52,7 +60,11 @@ class InputNewItem extends Component {
                     <option value="Produce">Produce</option>
                     <option value="Seafood">Seafood</option>
                 </select>
-                <button onClick={this.handleSubmit}>Add item</button>      
+                {/* <button onClick={this.handleSubmit}>Add</button> */}
+                <FontAwesomeIcon onClick={(this.state.userInput !== '') ? this.handleSubmit : null}    icon={["far", "plus-square"]} type="submit"
+                // disabled={!this.state.valueInput}
+                // {(this.state.userInput === '') ? disabled : 'Please enter an item'}
+                />      
             </form>
         )
     }

@@ -3,16 +3,23 @@ import { Component } from 'react';
 import firebase from './firebase.js';
 import InputNewItem from './InputNewItem.js';
 // import ShowList from './ShowList.js';
-import RemoveItem from './RemoveItem.js'
+import RemoveItem from './RemoveItem.js';
 // import ToggleComplete from './ToggleComplete.js';
-import UpdateItem from './UpdateItem.js'
+import UpdateItem from './UpdateItem.js';
 
 // import ReactDOM from 'react-dom'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPenSquare, faSave, faTrashAlt, faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faPenSquare, faSave, faTrashAlt, faCheckSquare, faSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+
+import { faEdit as farEdit, faSave as farSave, faTrashAlt as farTrashAlt, faCheckSquare as farCheckSquare, faSquare as farSquare, faPlusSquare as farPlusSquare, faMinusSquare as farMinusSquare } from '@fortawesome/free-regular-svg-icons'
+
+
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-library.add(faPenSquare, faSave, faTrashAlt, faCheckSquare, faSquare)
+library.add(farEdit, farSave, farTrashAlt, farCheckSquare, farSquare, farPlusSquare, farMinusSquare);
+
 
 class App extends Component {
 
@@ -95,8 +102,8 @@ class App extends Component {
                           return (
                             <ul key={item[0]}>
                               <li>
-                                <div onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
-                                  <FontAwesomeIcon icon={ (completed[index]) ? "check-square" : "square" }/>
+                                <div className="item"onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
+                                  <FontAwesomeIcon icon={ (completed[index]) ? ["far", "check-square"] : ["far", "square"] }/>
                                     <p className={ (completed[index]) ? "done" : "notDone" }>
                                       {item[1]}
                                     </p>
