@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import firebase from "./firebase.js";
+import firebase from './firebase.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DepartmentList from './DepartmentList.js';
 
@@ -9,7 +9,7 @@ class UpdateItem extends Component {
         super()
         this.state = {
             itemToEdit: '',
-            newDept: "choose location",
+            newDept: 'choose location',
             showDropdown: false
         }
     }
@@ -48,24 +48,24 @@ class UpdateItem extends Component {
         return (
             <div className='update'>
                 {/* edit button */}
-                <button onClick={this.handleShowDropdown} className="edit" aria-label='edit department'>
+                <button onClick={this.handleShowDropdown} className='edit' aria-label='edit department'>
                     <FontAwesomeIcon  
                         className='icon'
-                        icon= {["far", "edit"]} 
+                        icon= {['far', 'edit']} 
                     />
                 </button>
                 {/* condition to toggle updated location dropdown render */}
                 {
                     (this.state.showDropdown)
                     ? <form className='dropdownAndSave'>
-                        <label htmlFor="location" ></label>
-                        <select name="location" id="location" onChange={this.handleDeptUpdate} className='updateDeptDropdown'>
+                        <label htmlFor='location' ></label>
+                        <select name='location' id='location' onChange={this.handleDeptUpdate} className='updateDeptDropdown'>
                             <DepartmentList />
                         </select>
-                        <button onClick={this.handleUpdateSubmit} className="save" aria-label='save department change'>
+                        <button onClick={this.handleUpdateSubmit} className='save' aria-label='save department change'>
                             <FontAwesomeIcon 
                                 className='icon'
-                                icon={["far", "save"]} 
+                                icon={['far', 'save']} 
                             />     
                         </button>
                     </form>

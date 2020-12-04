@@ -9,7 +9,7 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: "choose location",
+            dept: 'choose location',
         }
     }
 
@@ -50,23 +50,23 @@ class InputNewItem extends Component {
             >
                 <div className='itemInput'>
                     {/* item input text area */}
-                    <label htmlFor="newItem">Item: </label>
+                    <label htmlFor='newItem'>Item: </label>
                     <input 
                         className='inputField'
-                        type="text"
+                        type='text'
                         id='newItem'
                         value={this.state.userInput}
                         onChange={this.handleInputChange}
-                        placeholder="Enter an item"
+                        placeholder='Enter an item'
                         required
                     />
                 </div>
                 <div className='deptInput'>
                     {/* location dropdown */}
-                    <label htmlFor="location"> Dept / aisle: </label>
+                    <label htmlFor='location'> Dept / aisle: </label>
                     <select 
                         className='selectField'
-                        name="location" id="location" 
+                        name='location' id='location' 
                         onChange={this.handleDeptChange} 
                         value={this.state.dept}>
                             {/* location selections component */}
@@ -78,8 +78,8 @@ class InputNewItem extends Component {
                     <button className='addButton' aria-label='add item to list'>
                         <FontAwesomeIcon 
                             className='icon'     
-                            icon={["far", "plus-square"]} 
-                            type="submit" 
+                            icon={['far', 'plus-square']} 
+                            type='submit' 
                         />      
                     </button>
                 </div>

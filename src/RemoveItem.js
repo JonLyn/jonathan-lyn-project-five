@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // remove item button
 const RemoveItem = ({ remove }) => {
@@ -6,7 +6,7 @@ const RemoveItem = ({ remove }) => {
             <button onClick={ remove } aria-label='delete item from list' className='removeButton'>
                 <FontAwesomeIcon 
                     className='icon'
-                    icon={["far", "minus-square"]}
+                    icon={['far', 'minus-square']}
                 />
             </button>
         )
