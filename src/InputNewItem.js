@@ -9,7 +9,7 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: "Don't know",
+            dept: 'choose location',
         }
     }
 
@@ -38,15 +38,15 @@ class InputNewItem extends Component {
 
     render() { 
         return (
-            <form onSubmit={(this.state.userInput !== '') ? this.handleSubmit : null} className='newItemForm'>
+            <form onSubmit={(this.state.userInput === '' || this.state.dept === 'choose location') ? null : this.handleSubmit} className='newItemForm'>
                 <div className='itemInput'>
-                    <label htmlFor="newItem">Enter item: </label>
+                    <label htmlFor="newItem">Item: </label>
                     <input 
                         type="text"
                         id='newItem'
                         value={this.state.userInput}
                         onChange={this.handleInputChange}
-                        placeholder="Please enter an item"
+                        placeholder="enter an item"
                         required
                     />
                 </div>

@@ -5,10 +5,10 @@ import InputNewItem from './InputNewItem.js';
 import RemoveItem from './RemoveItem.js';
 import UpdateItem from './UpdateItem.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit as farEdit, faSave as farSave, faTrashAlt as farTrashAlt, faCheckSquare as farCheckSquare, faSquare as farSquare, faPlusSquare, faMinusSquare as farMinusSquare } from '@fortawesome/free-regular-svg-icons'
+import { faEdit as farEdit, faSave as farSave, faTrashAlt as farTrashAlt, faCheckSquare as farCheckSquare, faSquare as farSquare, faPlusSquare as farPlusSquare, faMinusSquare as farMinusSquare } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-library.add(farEdit, farSave, farTrashAlt, farCheckSquare, farSquare, faPlusSquare, farMinusSquare);
+library.add(farEdit, farSave, farTrashAlt, farCheckSquare, farSquare, farPlusSquare, farMinusSquare);
 
 class App extends Component {
 
@@ -71,7 +71,7 @@ class App extends Component {
 
   render() { 
     return (
-      <section >
+      <div className='contentWrapper'>
         <header>
           <h1>Aisle <span className='attack'>Attack!</span></h1>
           <h2>A grocery list that stores the location of the stuff you want</h2>
@@ -149,7 +149,7 @@ class App extends Component {
         <footer>
           Crafted by <a href='www.jonraftsode.com'>jonCraftsCode</a> at <a href='www.junocollege.com'>Juno college</a>
         </footer>
-      </section>
+      </div>
     )
   }
 }

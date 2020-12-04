@@ -9,7 +9,7 @@ class UpdateItem extends Component {
         super()
         this.state = {
             itemToEdit: '',
-            newDept: 'Unknown',
+            newDept: "Don't know",
             showDropdown: false
         }
     }
@@ -52,14 +52,14 @@ class UpdateItem extends Component {
 
     render() { 
         return (
-            <div>
+            <div className='update'>
                 <button onClick={this.handleShowDropdown} className="edit" aria-label='edit department'>
                     <FontAwesomeIcon  icon= {["far", "edit"]} />
                 </button>
                 {
                     (this.state.showDropdown)
-                    ? <form>
-                        <label htmlFor="location"> Change location: </label>
+                    ? <form className='dropdownAndSave'>
+                        <label htmlFor="location" ></label>
                         <select name="location" id="location" onChange={this.handleDeptUpdate}>
                             <DepartmentList />
                         </select>

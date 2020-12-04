@@ -4,12 +4,12 @@ class DepartmentList extends Component {
     render() { 
         return (
             <Fragment>
-                <option value="placeholder" disabled>Choose location</option>
-                <option value="Don't know">Don't know</option>
-                <option value="Deli">Deli</option>
-                <option value="Meat">Meat</option>
-                <option value="Produce">Produce</option>
-                <option value="Seafood">Seafood</option>
+                <option value="choose location" disabled>Choose location</option>
+                <option value="don't know">Don't know</option>
+                <option value="deli">Deli</option>
+                <option value="meat">Meat</option>
+                <option value="produce">Produce</option>
+                <option value="seafood">Seafood</option>
             </Fragment>
         )
     }

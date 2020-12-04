@@ -3,7 +3,17 @@ body {
     color: $text;
     font-family: $primaryFont;
     font-size: 1.6rem;
-     text-transform: uppercase;
+    text-transform: uppercase;
+}
+
+.contentWrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
 }
 
 html {
@@ -71,8 +81,8 @@ ul {
 
 
 footer {
-    position: absolute;
-    bottom: 0;
+    // position: absolute;
+    // bottom: 0;
     text-align: center;
     width: 100%;
     background-color: white;
@@ -98,6 +108,7 @@ button {
     width: 180px;
     margin-left: 15px;
     margin-top: 5px;
+
 }
 
 .done {
@@ -107,11 +118,18 @@ button {
 
 .itemAndCheck {
     display: flex;
+    align-items: start;
 }
 
 .location {
     margin-bottom: 15px;
 }
+
+select,
+input {
+    text-transform: uppercase;
+}
+
 
 
 
