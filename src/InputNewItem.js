@@ -9,22 +9,25 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: "don't know",
+            dept: "choose location",
         }
     }
 
+    // set user input to state
     handleInputChange = (e) => {
         this.setState({
             userInput: e.target.value
         }) 
     }
 
+    // set dept chosen to state
     handleDeptChange = (e) => {
         this.setState({
             dept: e.target.value
         })
     }
 
+    // submit function to send user inputs to firebase
     handleSubmit = (e) => {
         e.preventDefault();
         let inputted = this.state.userInput
@@ -39,12 +42,14 @@ class InputNewItem extends Component {
     render() { 
         return (
             <form 
+                // condition to check if both input and location are chosen
                 onSubmit={(this.state.userInput !== '' && this.state.dept !== 'choose location') 
                 ? this.handleSubmit 
                 : null} 
                 className='newItemForm'
             >
                 <div className='itemInput'>
+                    {/* item input text area */}
                     <label htmlFor="newItem">Item: </label>
                     <input 
                         className='inputField'
@@ -57,20 +62,22 @@ class InputNewItem extends Component {
                     />
                 </div>
                 <div className='deptInput'>
+                    {/* location dropdown */}
                     <label htmlFor="location"> Dept / aisle: </label>
                     <select 
                         className='selectField'
                         name="location" id="location" 
                         onChange={this.handleDeptChange} 
                         value={this.state.dept}>
+                            {/* location selections component */}
                             <DepartmentList 
                         required    
-                    />
-                        
+                    />  
                     </select>
-
+                    {/* button to submit user inputs */}
                     <button className='addButton' aria-label='add item to list'>
-                        <FontAwesomeIcon      
+                        <FontAwesomeIcon 
+                            className='icon'     
                             icon={["far", "plus-square"]} 
                             type="submit" 
                         />      

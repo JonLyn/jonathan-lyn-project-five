@@ -1,25 +1,3 @@
-body {
-    background-color: $primaryBackground;
-    color: $text;
-    font-family: $primaryFont;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-}
-
-.contentWrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex-grow: 1;
-}
-
-html {
-    font-size: 62.5%;
-}
-
 // Remove default styling
 *,
 h1,
@@ -35,9 +13,20 @@ button {
     line-height: 1;
 }
 
-// img {
-//     width: 100%;
-// }
+body {
+    background-color: $primaryBackground;
+    color: $text;
+    font-family: $primaryFont;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+
+// wrapper to keep footer at bottom of page
+.contentWrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
 // Wrapper to center and constrain content
 .wrapper {
@@ -45,6 +34,14 @@ button {
     max-width: 800px;
     margin: 0 auto;
     padding-top: 20px;
+}
+
+main {
+    flex-grow: 1;
+}
+
+html {
+    font-size: 62.5%;
 }
 
 header {
@@ -67,6 +64,10 @@ h2 {
     font-size: 1.6rem;
 }
 
+.noItemErrorMsg {
+    text-align: center;
+}
+
 ul {
     list-style: none;
 }
@@ -81,11 +82,10 @@ ul {
     background-color: $primary;
 }
 
-
 footer {
     text-align: center;
     width: 100%;
-    background-color: white;
+    background-color: $primary;
     padding: 10px;
 }
 
@@ -94,7 +94,6 @@ button {
     margin-left: 5px;
     padding: 0;
     background-color: $primaryBackground;
- 
 }
 
 .itemWrapper {
@@ -110,24 +109,20 @@ button {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
- 
-    
 }
-
-// .itemsList, li {
-//     text-align: center;
-// }
 
 .done,
 .notDone {
-    width: 180px;
+    min-width: 180px;
     margin-left: 15px;
     margin-top: 5px;
 }
 
 .done {
     text-decoration: line-through;
+    opacity: 0.5;
 }
+
 
 
 .itemAndCheck {
@@ -139,10 +134,26 @@ button {
     margin-bottom: 15px;
 }
 
-.icon {
-    display: none;
+.icon:hover,
+button:focus,
+a:hover,
+a:focus
+ {
+    color: $accent;
 }
 
+select:hover,
+select:focus,
+input:hover,
+input:focus {
+    border: 3px solid $accent;
+}
 
+// media breakpoint to keep item list from expanding too much on larger screens
+@media (min-width: 375px) {
+    .wrapper {
+        max-width: 350px;
+    }
+}
 
 

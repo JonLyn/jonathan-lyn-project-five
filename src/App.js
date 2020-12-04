@@ -42,6 +42,7 @@ class App extends Component {
     })
   }
 
+  // function to remove item
   removeItemFromDb = (itemKey, dept) => {
     const dbRef = firebase.database().ref();
     let deptOrAisle = `/${dept[0]}/`;
@@ -56,6 +57,7 @@ class App extends Component {
     })
   }
 
+  // function to toggle item completed
   markCompleted = (itemKey, dept, bool) => {
     const dbRef = firebase.database().ref();
     let completePath = `/${dept[0]}/${itemKey}/`;
@@ -64,28 +66,24 @@ class App extends Component {
     } else {
       dbRef.child(completePath).update({0: false});
     }
-    console.log(this.state.enterItemError)
   }
-
-  
 
   render() { 
     return (
       <div className='contentWrapper'>
+        {/* header section */}
         <header>
           <h1>Aisle <span className='attack'>Attack!</span></h1>
           <h2>A grocery list that stores the location of the stuff you want</h2>
         </header>
-
+        {/* main content */}
         <main >
-        
+          {/* item input fields component */}
           <InputNewItem />
-
           <section className='wrapper'>
-
-          
-            <h2>{this.state.enterItemError}</h2> 
-
+            {/* message when no items on list */}
+            <h2 className='noItemErrorMsg'>{this.state.enterItemError}</h2> 
+            {/* loop through items and location to render to screen */}
             {
               this.state.departments.map((singleDept, i) => {
                 let dept = singleDept;
@@ -100,32 +98,34 @@ class App extends Component {
                   <div key={i}>
                     <ul className='itemsList'>
                       <li>
+                        {/* show dept/aisle name */}
                         <h3 className='location'>{singleDept[0]}</h3>
                           {
                             itemsArray.map((item, index) => {
                               return (
                                 <ul key={item[0]} >
                                   <li className='addedItem'>
-
+                                    {/* edit dept component */}
                                     <UpdateItem
                                       item={item[1][1]}
                                       itemKey={item[0]} 
                                       dept={dept[0]}
                                     />
-
                                     <div className='itemWrapper'>
+                                      {/* call function to toggle completed or not */}
                                       <div 
                                       className='itemAndCheck' 
                                       onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
-
+                                      {/* conditional to toggle checked or not checked */}
                                       <button aria-label='toggle completed'>
                                         <FontAwesomeIcon 
+                                          className='icon'
                                           icon={ (completed[index]) 
                                           ? ['far', 'check-square'] 
                                           : ['far', 'square'] 
                                         }/>
                                       </button>
-
+                                      {/* conditional to toggle completed or not styling on item */}
                                       <p 
                                         className={ (completed[index]) 
                                         ? 'done' 
@@ -142,9 +142,6 @@ class App extends Component {
                                         this.removeItemFromDb(item[0], dept) 
                                       }}
                                     />
-                                  
-                                
-
                                   </li>
                                 </ul>
                               )
@@ -158,6 +155,7 @@ class App extends Component {
             }
           </section>
         </main>
+        {/* footer section */}
         <footer>
           Crafted by <a href='www.jonraftsode.com'>jonCraftsCode</a> at <a href='www.junocollege.com'>Juno college</a>
         </footer>

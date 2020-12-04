@@ -9,11 +9,12 @@ class UpdateItem extends Component {
         super()
         this.state = {
             itemToEdit: '',
-            newDept: "don't know",
+            newDept: "choose location",
             showDropdown: false
         }
     }
 
+    // function to toggle dropdown menu to update location
     handleShowDropdown = (e) => {
         e.preventDefault();
         const { item } = this.props;
@@ -23,16 +24,16 @@ class UpdateItem extends Component {
             itemToEdit: updatedItem[0],
             showDropdown: !showDropdownBool
         })
-        console.log(showDropdownBool)
     }
 
-
+    // set new location to state
     handleDeptUpdate = (e) => {
         this.setState({
             newDept: e.target.value,
         })
     }
 
+    // function to submit new location of chosen item to firebase
     handleUpdateSubmit = (e) => {
         let deletePath = `/${this.props.dept}/${this.props.itemKey}/`
         e.preventDefault();
@@ -43,13 +44,17 @@ class UpdateItem extends Component {
         dbRef.child(deletePath).remove()
     }
 
-
     render() { 
         return (
             <div className='update'>
+                {/* edit button */}
                 <button onClick={this.handleShowDropdown} className="edit" aria-label='edit department'>
-                    <FontAwesomeIcon  icon= {["far", "edit"]} />
+                    <FontAwesomeIcon  
+                        className='icon'
+                        icon= {["far", "edit"]} 
+                    />
                 </button>
+                {/* condition to toggle updated location dropdown render */}
                 {
                     (this.state.showDropdown)
                     ? <form className='dropdownAndSave'>
@@ -58,7 +63,10 @@ class UpdateItem extends Component {
                             <DepartmentList />
                         </select>
                         <button onClick={this.handleUpdateSubmit} className="save" aria-label='save department change'>
-                            <FontAwesomeIcon icon={["far", "save"]} />     
+                            <FontAwesomeIcon 
+                                className='icon'
+                                icon={["far", "save"]} 
+                            />     
                         </button>
                     </form>
                     : null
