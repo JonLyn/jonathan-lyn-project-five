@@ -16,7 +16,7 @@ class App extends Component {
     super();
     this.state = { 
       departments: [],
-      enterItem: '',
+      enterItemError: '',
       newDept: ''
     }
   }
@@ -28,7 +28,7 @@ class App extends Component {
       const firebaseDataObject = data.val();
       if (firebaseDataObject === null) {
         this.setState({
-          enterItem: 'Enter an item to your list'
+          enterItemError: 'Enter an item to your list'
         }) 
       } else {
         let deptArray = Object.keys(firebaseDataObject).map((key) => {
@@ -36,7 +36,7 @@ class App extends Component {
         })
         this.setState({
           departments: deptArray,
-          enterItem: ''
+          enterItemError: ''
         })
       }
     })
@@ -64,67 +64,90 @@ class App extends Component {
     } else {
       dbRef.child(completePath).update({0: false});
     }
+    console.log(this.state.enterItemError)
   }
+
+  
 
   render() { 
     return (
-      <section className='wrapper'>
-          <header>
-            <h1>Aisle Attack!</h1>
-          </header>
-        <InputNewItem />
-        <h2>{this.state.enterItem}</h2>
-        {
-          this.state.departments.map((singleDept, i) => {
-            let dept = singleDept;
-            let itemsArray = [];
-            let completed = []
-            for (let idKey in singleDept[1]) {
-              const itemIds = [idKey, singleDept[1][idKey]];
-              itemsArray.push(itemIds);
-              completed.push(singleDept[1][idKey][0]);
-            } 
-            return (
-              <div key={i}>
-                <ul>
-                  <li>
-                    <p>{singleDept[0]}</p>
-                      {
-                        itemsArray.map((item, index) => {
-                          return (
-                            <ul key={item[0]}>
-                              <li>
-                                <div className="item" onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
-                                  <FontAwesomeIcon icon={ (completed[index]) ? ["far", "check-square"] : ["far", "square"] }/>
-                                    <p className={ (completed[index]) ? "done" : "notDone" }>
-                                      {item[1]}
-                                    </p>
-                                </div>
-                            
-                                <RemoveItem         
-                                  remove={ () => {
-                                    this.removeItemFromDb(item[0], dept) 
-                                  }}
-                                />
-                              
-                                <UpdateItem
-                                  item={item[1][1]}
-                                  itemKey={item[0]} 
-                                  dept={dept[0]}
-                                />
-                              </li>
-                            </ul>
-                          )
-                        })
-                      }
-                  </li>
-                </ul>
-              </div>
-            )
-          })
-        }
+      <section >
+        <header>
+          <h1>Aisle <span className='attack'>Attack!</span></h1>
+          <h2>A grocery list that stores the location of the stuff you want</h2>
+        </header>
+
+        <main >
+        
+          <InputNewItem />
+
+          <section className='wrapper'>
+
+          
+            <h2>{this.state.enterItemError}</h2> 
+
+            {
+              this.state.departments.map((singleDept, i) => {
+                let dept = singleDept;
+                let itemsArray = [];
+                let completed = []
+                for (let idKey in singleDept[1]) {
+                  const itemIds = [idKey, singleDept[1][idKey]];
+                  itemsArray.push(itemIds);
+                  completed.push(singleDept[1][idKey][0]);
+                } 
+                return (
+                  <div key={i}>
+                    <ul>
+                      <li>
+                        <h3 className='location'>{singleDept[0]}</h3>
+                          {
+                            itemsArray.map((item, index) => {
+                              return (
+                                <ul key={item[0]}>
+                                  <li className='addedItem'>
+
+                                        <UpdateItem
+                                      item={item[1][1]}
+                                      itemKey={item[0]} 
+                                      dept={dept[0]}
+                                    />
+
+                                    <div className='itemAndCheck' onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
+
+                                      <button aria-label='toggle completed'>
+                                        <FontAwesomeIcon icon={ (completed[index]) ? ['far', 'check-square'] : ['far', 'square'] }/>
+                                      </button>
+
+                                      <p className={ (completed[index]) ? 'done' : 'notDone' }>
+                                        {item[1]}
+                                      </p>
+
+                                    </div>
+                                
+                                    <RemoveItem         
+                                      remove={ () => {
+                                        this.removeItemFromDb(item[0], dept) 
+                                      }}
+                                    />
+                                  
+                                
+
+                                  </li>
+                                </ul>
+                              )
+                            })
+                          }
+                      </li>
+                    </ul>
+                  </div>
+                )
+              })
+            }
+          </section>
+        </main>
         <footer>
-          Crafted by <a href="www.jonraftsode.com">jonCraftsCode</a> at <a href="www.junocollege.com">Juno college</a>
+          Crafted by <a href='www.jonraftsode.com'>jonCraftsCode</a> at <a href='www.junocollege.com'>Juno college</a>
         </footer>
       </section>
     )

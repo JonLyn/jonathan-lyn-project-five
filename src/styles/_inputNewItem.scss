@@ -1,0 +1,33 @@
+.newItemForm {
+    display: flex;
+    flex-direction: column;
+    background-color: $primary;
+    padding: 10px 0;
+}
+
+.itemInput,
+.deptInput {
+    display: flex;
+    align-items: center;
+    max-width: 80%;
+    margin: 5px auto;
+    height: 30px;
+}
+
+// .addbutton {
+
+// }
+
+label {
+    min-width: 100px;
+    max-width: 100px;
+    text-transform: uppercase;
+}
+
+input,
+select {
+    // min-width: calc(100% - 100px);
+    width: 400px;
+}
+
+ 

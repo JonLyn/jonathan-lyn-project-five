@@ -53,8 +53,9 @@ class UpdateItem extends Component {
     render() { 
         return (
             <div>
-                <FontAwesomeIcon onClick={this.handleShowDropdown} icon= {["far", "edit"]} className="edit"/>
-                {/* <button onClick={this.handleShowDropdown}>Edit</button> */}
+                <button onClick={this.handleShowDropdown} className="edit" aria-label='edit department'>
+                    <FontAwesomeIcon  icon= {["far", "edit"]} />
+                </button>
                 {
                     (this.state.showDropdown)
                     ? <form>
@@ -62,8 +63,9 @@ class UpdateItem extends Component {
                         <select name="location" id="location" onChange={this.handleDeptUpdate}>
                             <DepartmentList />
                         </select>
-                        {/* <button></button> */}
-                        <FontAwesomeIcon onClick={this.handleUpdateSubmit} icon={["far", "save"]} className="save"/>      
+                        <button onClick={this.handleUpdateSubmit} className="save" aria-label='save department change'>
+                            <FontAwesomeIcon icon={["far", "save"]} />     
+                        </button>
                     </form>
                     : null
                 }

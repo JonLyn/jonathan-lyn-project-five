@@ -9,7 +9,7 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: 'Unknown',
+            dept: "Don't know",
         }
     }
 
@@ -38,26 +38,34 @@ class InputNewItem extends Component {
 
     render() { 
         return (
-            <form onSubmit={(this.state.userInput !== '') ? this.handleSubmit : null} >
-                <label htmlFor="newItem">Enter item: </label>
-                <input 
-                    type="text"
-                    id='newItem'
-                    value={this.state.userInput}
-                    onChange={this.handleInputChange}
-                    placeholder="Please enter an item"
-                    required
-                />
-                <label htmlFor="location"> Dept / aisle: </label>
-                <select name="location" id="location" onChange={this.handleDeptChange}>
-                    <DepartmentList />
-                </select>
-                <button>
-                    <FontAwesomeIcon      
-                        icon={["far", "plus-square"]} 
-                        type="submit" 
-                    />      
-                </button>
+            <form onSubmit={(this.state.userInput !== '') ? this.handleSubmit : null} className='newItemForm'>
+                <div className='itemInput'>
+                    <label htmlFor="newItem">Enter item: </label>
+                    <input 
+                        type="text"
+                        id='newItem'
+                        value={this.state.userInput}
+                        onChange={this.handleInputChange}
+                        placeholder="Please enter an item"
+                        required
+                    />
+                </div>
+                <div className='deptInput'>
+                    <label htmlFor="location"> Dept / aisle: </label>
+                    <select 
+                    name="location" id="location" 
+                    onChange={this.handleDeptChange} 
+                    value={this.state.dept}>
+                        <DepartmentList />
+                    </select>
+
+                    <button className='addButton' aria-label='add item to list'>
+                        <FontAwesomeIcon      
+                            icon={["far", "plus-square"]} 
+                            type="submit" 
+                        />      
+                    </button>
+                </div>
             </form>
         )
     }

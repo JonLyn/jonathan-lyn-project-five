@@ -1,12 +1,13 @@
 body {
-    background-color: $background;
+    background-color: $primaryBackground;
     color: $text;
     font-family: $primaryFont;
     font-size: 1.6rem;
+     text-transform: uppercase;
 }
 
 html {
-  font-size: 62.5%;
+    font-size: 62.5%;
 }
 
 // Remove default styling
@@ -21,6 +22,7 @@ button {
     border: 0;
     border: none;
     text-decoration: none;
+    line-height: 1;
 }
 
 // img {
@@ -32,15 +34,84 @@ button {
     width: 90%;
     max-width: 1000px;
     margin: 0 auto;
-    // margin-top: 30px;
+    padding-top: 20px;
+}
+
+header {
+    background-color: $secondaryBackground;
+    text-align: center;
+    padding: 10px;
 }
 
 h1 {
-    text-align: center;
-    background-color: $primary;
+    font-family: $titleFont;
+        & .attack {
+            color: $accent;
+        }
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 1.6rem;
 }
 
 ul {
     list-style: none;
 }
+
+.edit {
+    position: relative;
+    bottom: 1px;
+    margin-right: 10px;
+}
+
+.addButton {
+    background-color: $primary;
+}
+
+
+footer {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+}
+
+button {
+    font-size: 2.5rem;
+    margin-left: 5px;
+    padding: 0;
+    background-color: $primaryBackground;
+ 
+}
+
+.addedItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.done,
+.notDone {
+    width: 180px;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+
+.itemAndCheck {
+    display: flex;
+}
+
+.location {
+    margin-bottom: 15px;
+}
+
+
 
