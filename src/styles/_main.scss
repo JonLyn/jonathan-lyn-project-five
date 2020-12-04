@@ -73,6 +73,7 @@ ul {
 }
 
 .edit {
+    width: 30px;
     position: relative;
     bottom: 1px;
     margin-right: 10px;
@@ -135,6 +136,7 @@ button {
 }
 
 .icon:hover,
+button:hover,
 button:focus,
 a:hover,
 a:focus
@@ -149,11 +151,47 @@ input:focus {
     border: 3px solid $accent;
 }
 
+    .editText,
+    .removeText {
+        display: none;
+    }
+
+
 // media breakpoint to keep item list from expanding too much on larger screens
 @media (min-width: 375px) {
     .wrapper {
-        max-width: 350px;
+        max-width: 550px;
+    }
+
+    .edit,
+    .removeButton {
+        width: 30px;
+        display: flex;
+        align-items: center;
+        & span {
+            font-size: 1.6rem;
+            font-family: $primaryFont;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding-left: 5px;
+        }
     }
 }
+
+// media breakpoint to show button descriptions
+@media (min-width: 520px) {
+    .edit,
+    .removeButton {
+        width: 100px;
+    }
+
+     .editText,
+     .removeText {
+        display: inline-block;
+    }
+
+
+}
+
 
 

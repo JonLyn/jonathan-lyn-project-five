@@ -53,6 +53,7 @@ class UpdateItem extends Component {
                         className='icon'
                         icon= {['far', 'edit']} 
                     />
+                    <span className='editText'>Edit dept</span>
                 </button>
                 {/* condition to toggle updated location dropdown render */}
                 {

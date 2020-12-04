@@ -8,6 +8,7 @@ const RemoveItem = ({ remove }) => {
                     className='icon'
                     icon={['far', 'minus-square']}
                 />
+                <span className='removeText'>Delete</span>
             </button>
         )
     }
