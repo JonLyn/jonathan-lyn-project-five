@@ -150,9 +150,10 @@ input:hover,
 input:focus {
     border: 3px solid $accent;
 }
-
+    .saveText,
     .editText,
-    .removeText {
+    .removeText,
+    .addText {
         display: none;
     }
 
@@ -164,7 +165,9 @@ input:focus {
     }
 
     .edit,
-    .removeButton {
+    .removeButton,
+    .addButton,
+    .save {
         width: 30px;
         display: flex;
         align-items: center;
@@ -181,12 +184,16 @@ input:focus {
 // media breakpoint to show button descriptions
 @media (min-width: 520px) {
     .edit,
-    .removeButton {
+    .removeButton,
+    .addButton
+    .save {
         width: 100px;
     }
 
      .editText,
-     .removeText {
+     .removeText,
+     .addText,
+     .saveText {
         display: inline-block;
     }
 

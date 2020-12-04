@@ -67,7 +67,8 @@ class UpdateItem extends Component {
                             <FontAwesomeIcon 
                                 className='icon'
                                 icon={['far', 'save']} 
-                            />     
+                            />
+                            <span className='saveText'>Save</span>     
                         </button>
                     </form>
                     : null
