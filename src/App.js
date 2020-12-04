@@ -157,7 +157,7 @@ class App extends Component {
         </main>
         {/* footer section */}
         <footer>
-          Crafted by <a href='www.jonraftsode.com'>jonCraftsCode</a> at <a href='www.junocollege.com'>Juno college</a>
+          Crafted by <a href='https://www.joncraftscode.com'>jonCraftsCode</a> at <a href='https://junocollege.com'>Juno college</a>
         </footer>
       </div>
     )
