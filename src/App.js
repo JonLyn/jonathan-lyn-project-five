@@ -98,32 +98,44 @@ class App extends Component {
                 } 
                 return (
                   <div key={i}>
-                    <ul>
+                    <ul className='itemsList'>
                       <li>
                         <h3 className='location'>{singleDept[0]}</h3>
                           {
                             itemsArray.map((item, index) => {
                               return (
-                                <ul key={item[0]}>
+                                <ul key={item[0]} >
                                   <li className='addedItem'>
 
-                                        <UpdateItem
+                                    <UpdateItem
                                       item={item[1][1]}
                                       itemKey={item[0]} 
                                       dept={dept[0]}
                                     />
 
-                                    <div className='itemAndCheck' onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
+                                    <div className='itemWrapper'>
+                                      <div 
+                                      className='itemAndCheck' 
+                                      onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
 
                                       <button aria-label='toggle completed'>
-                                        <FontAwesomeIcon icon={ (completed[index]) ? ['far', 'check-square'] : ['far', 'square'] }/>
+                                        <FontAwesomeIcon 
+                                          icon={ (completed[index]) 
+                                          ? ['far', 'check-square'] 
+                                          : ['far', 'square'] 
+                                        }/>
                                       </button>
 
-                                      <p className={ (completed[index]) ? 'done' : 'notDone' }>
+                                      <p 
+                                        className={ (completed[index]) 
+                                        ? 'done' 
+                                        : 'notDone' 
+                                      }>
                                         {item[1]}
                                       </p>
-
                                     </div>
+                                  </div>
+                                    
                                 
                                     <RemoveItem         
                                       remove={ () => {

@@ -9,7 +9,7 @@ class InputNewItem extends Component {
         super();
         this.state = {
             userInput: '',
-            dept: 'choose location',
+            dept: "don't know",
         }
     }
 
@@ -38,25 +38,35 @@ class InputNewItem extends Component {
 
     render() { 
         return (
-            <form onSubmit={(this.state.userInput === '' || this.state.dept === 'choose location') ? null : this.handleSubmit} className='newItemForm'>
+            <form 
+                onSubmit={(this.state.userInput !== '' && this.state.dept !== 'choose location') 
+                ? this.handleSubmit 
+                : null} 
+                className='newItemForm'
+            >
                 <div className='itemInput'>
                     <label htmlFor="newItem">Item: </label>
                     <input 
+                        className='inputField'
                         type="text"
                         id='newItem'
                         value={this.state.userInput}
                         onChange={this.handleInputChange}
-                        placeholder="enter an item"
+                        placeholder="Enter an item"
                         required
                     />
                 </div>
                 <div className='deptInput'>
                     <label htmlFor="location"> Dept / aisle: </label>
                     <select 
-                    name="location" id="location" 
-                    onChange={this.handleDeptChange} 
-                    value={this.state.dept}>
-                        <DepartmentList />
+                        className='selectField'
+                        name="location" id="location" 
+                        onChange={this.handleDeptChange} 
+                        value={this.state.dept}>
+                            <DepartmentList 
+                        required    
+                    />
+                        
                     </select>
 
                     <button className='addButton' aria-label='add item to list'>

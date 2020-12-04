@@ -9,7 +9,7 @@ class UpdateItem extends Component {
         super()
         this.state = {
             itemToEdit: '',
-            newDept: "Don't know",
+            newDept: "don't know",
             showDropdown: false
         }
     }
@@ -28,15 +28,9 @@ class UpdateItem extends Component {
 
 
     handleDeptUpdate = (e) => {
-        // const { item } = this.props;
-        // let updatedItem = Object.values({ item })
         this.setState({
             newDept: e.target.value,
-            // itemToEdit: updatedItem[0]
         })
-        // console.log('values', Object.values({ item }))
-        // console.log(updatedItem[0])
-        // console.log(this.state.itemToEdit)
     }
 
     handleUpdateSubmit = (e) => {
@@ -60,7 +54,7 @@ class UpdateItem extends Component {
                     (this.state.showDropdown)
                     ? <form className='dropdownAndSave'>
                         <label htmlFor="location" ></label>
-                        <select name="location" id="location" onChange={this.handleDeptUpdate}>
+                        <select name="location" id="location" onChange={this.handleDeptUpdate} className='updateDeptDropdown'>
                             <DepartmentList />
                         </select>
                         <button onClick={this.handleUpdateSubmit} className="save" aria-label='save department change'>
