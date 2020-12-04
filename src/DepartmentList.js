@@ -7,12 +7,12 @@ class DepartmentList extends Component {
             <Fragment>
                 <option value="choose location" disabled>Choose location</option>
                 <option value="don't know">Don't know</option>
-                <option value="deli">Bakery</option>
-                <option value="deli">Dairy</option>
+                <option value="bakery">Bakery</option>
+                <option value="dairy">Dairy</option>
                 <option value="deli">Deli</option>
-                <option value="deli">Freezer</option>
+                <option value="freezer">Freezer</option>
                 <option value="meat">Meat</option>
-                <option value="deli">Misc.</option>
+                <option value="misc.">Misc.</option>
                 <option value="produce">Produce</option>
                 <option value="seafood">Seafood</option>
                 <option value="aisle 1">Aisle 1</option>

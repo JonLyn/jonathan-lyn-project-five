@@ -38,7 +38,7 @@ class UpdateItem extends Component {
         let deletePath = `/${this.props.dept}/${this.props.itemKey}/`
         e.preventDefault();
         let newInputted = this.state.itemToEdit
-        let updatedItemNotCompletedArray = [true, newInputted]
+        let updatedItemNotCompletedArray = [false, newInputted]
         const dbRef = firebase.database().ref();
         dbRef.child(this.state.newDept).push(updatedItemNotCompletedArray)
         dbRef.child(deletePath).remove()
