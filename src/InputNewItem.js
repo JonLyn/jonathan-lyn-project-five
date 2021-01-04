@@ -32,7 +32,7 @@ class InputNewItem extends Component {
     e.preventDefault();
 
     let inputted = this.state.userInput
-    let itemNotCompletedArray = { 0: false, inputted }
+    let itemNotCompletedArray = [false, `${inputted}`]
     const dbRef = firebase.database().ref();
     dbRef.child(this.state.dept).push(itemNotCompletedArray);
     this.setState({

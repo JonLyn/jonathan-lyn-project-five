@@ -14,7 +14,7 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       departments: [],
       enterItemError: '',
       newDept: ''
@@ -29,11 +29,12 @@ class App extends Component {
       if (firebaseDataObject === null) {
         this.setState({
           enterItemError: 'Enter an item to your list'
-        }) 
+        })
       } else {
         let deptArray = Object.keys(firebaseDataObject).map((key) => {
           return [(key), firebaseDataObject[key]];
         })
+        console.log(deptArray);
         this.setState({
           departments: deptArray,
           enterItemError: ''
@@ -51,8 +52,8 @@ class App extends Component {
       const firebaseDataObject = data.val();
       if (firebaseDataObject === null) {
         this.setState({
-        departments: []
-      })
+          departments: []
+        })
       }
     })
   }
@@ -62,13 +63,13 @@ class App extends Component {
     const dbRef = firebase.database().ref();
     let completePath = `/${dept[0]}/${itemKey}/`;
     if (bool === false) {
-      dbRef.child(completePath).update({0: true});
+      dbRef.child(completePath).update({ 0: true });
     } else {
-      dbRef.child(completePath).update({0: false});
+      dbRef.child(completePath).update({ 0: false });
     }
   }
 
-  render() { 
+  render() {
     return (
       <div className='contentWrapper'>
         {/* header section */}
@@ -82,7 +83,7 @@ class App extends Component {
           <InputNewItem />
           <section className='wrapper'>
             {/* message when no items on list */}
-            <h2 className='noItemErrorMsg'>{this.state.enterItemError}</h2> 
+            <h2 className='noItemErrorMsg'>{this.state.enterItemError}</h2>
             {/* loop through items and location to render to screen */}
             {
               this.state.departments.map((singleDept, i) => {
@@ -93,60 +94,60 @@ class App extends Component {
                   const itemIds = [idKey, singleDept[1][idKey]];
                   itemsArray.push(itemIds);
                   completed.push(singleDept[1][idKey][0]);
-                } 
+                }
                 return (
                   <div key={i}>
                     <ul className='itemsList'>
                       <li>
                         {/* show dept/aisle name */}
                         <h3 className='location'>{singleDept[0]}</h3>
-                          {
-                            itemsArray.map((item, index) => {
-                              return (
-                                <ul key={item[0]} >
-                                  <li className='addedItem'>
-                                    {/* edit dept component */}
-                                    <UpdateItem
-                                      item={item[1][1]}
-                                      itemKey={item[0]} 
-                                      dept={dept[0]}
-                                    />
-                                    <div className='itemWrapper'>
-                                      {/* call function to toggle completed or not */}
-                                      <div 
-                                      className='itemAndCheck' 
-                                      onClick={ () => { this.markCompleted(item[0], dept, item[1][0]) }}>
+                        {
+                          itemsArray.map((item, index) => {
+                            return (
+                              <ul key={item[0]} >
+                                <li className='addedItem'>
+                                  {/* edit dept component */}
+                                  <UpdateItem
+                                    item={item[1][1]}
+                                    itemKey={item[0]}
+                                    dept={dept[0]}
+                                  />
+                                  <div className='itemWrapper'>
+                                    {/* call function to toggle completed or not */}
+                                    <div
+                                      className='itemAndCheck'
+                                      onClick={() => { this.markCompleted(item[0], dept, item[1][0]) }}>
                                       {/* conditional to toggle checked or not checked */}
                                       <button aria-label='toggle completed'>
-                                        <FontAwesomeIcon 
+                                        <FontAwesomeIcon
                                           className='icon'
-                                          icon={ (completed[index]) 
-                                          ? ['far', 'check-square'] 
-                                          : ['far', 'square'] 
-                                        }/>
+                                          icon={(completed[index])
+                                            ? ['far', 'check-square']
+                                            : ['far', 'square']
+                                          } />
                                       </button>
                                       {/* conditional to toggle completed or not styling on item */}
-                                      <p 
-                                        className={ (completed[index]) 
-                                        ? 'done' 
-                                        : 'notDone' 
-                                      }>
+                                      <p
+                                        className={(completed[index])
+                                          ? 'done'
+                                          : 'notDone'
+                                        }>
                                         {item[1]}
                                       </p>
                                     </div>
                                   </div>
-                                    
-                                
-                                    <RemoveItem         
-                                      remove={ () => {
-                                        this.removeItemFromDb(item[0], dept) 
-                                      }}
-                                    />
-                                  </li>
-                                </ul>
-                              )
-                            })
-                          }
+
+
+                                  <RemoveItem
+                                    remove={() => {
+                                      this.removeItemFromDb(item[0], dept)
+                                    }}
+                                  />
+                                </li>
+                              </ul>
+                            )
+                          })
+                        }
                       </li>
                     </ul>
                   </div>
@@ -165,3 +166,5 @@ class App extends Component {
 }
 
 export default App;
+
+
