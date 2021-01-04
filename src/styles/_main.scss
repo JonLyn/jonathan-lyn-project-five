@@ -5,205 +5,195 @@ h2,
 h3,
 figure,
 button {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border: none;
-    text-decoration: none;
-    line-height: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border: none;
+  text-decoration: none;
+  line-height: 1;
 }
 
 body {
-    background-color: $primaryBackground;
-    color: $text;
-    font-family: $primaryFont;
-    font-size: 1.6rem;
-    text-transform: uppercase;
+  background-color: $primaryBackground;
+  color: $text;
+  font-family: $primaryFont;
+  font-size: 1.6rem;
+  text-transform: uppercase;
 }
 
 // wrapper to keep footer at bottom of page
 .contentWrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 // Wrapper to center and constrain content
 .wrapper {
-    width: 90%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding-top: 20px;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 20px;
 }
 
 main {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 header {
-    background-color: $secondaryBackground;
-    text-align: center;
-    padding: 10px;
+  background-color: $secondaryBackground;
+  text-align: center;
+  padding: 10px;
 }
 
 h1 {
-    font-family: $primaryFont;
-    font-weight: 700;
-        & .attack {
-            color: $accent;
-            font-family: $titleFont;
-        }
+  font-family: $primaryFont;
+  font-weight: 700;
+  & .attack {
+    color: $accent;
+    font-family: $titleFont;
+  }
 }
 
 h2 {
-    font-weight: 700;
-    font-size: 1.6rem;
+  font-weight: 700;
+  font-size: 1.6rem;
 }
 
 .noItemErrorMsg {
-    text-align: center;
+  text-align: center;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 .edit {
-    width: 30px;
-    position: relative;
-    bottom: 1px;
-    margin-right: 10px;
+  width: 30px;
+  position: relative;
+  bottom: 1px;
+  margin-right: 10px;
 }
 
 .addButton {
-    background-color: $primary;
+  background-color: $primary;
 }
 
 footer {
-    text-align: center;
-    width: 100%;
-    background-color: $primary;
-    padding: 10px;
+  text-align: center;
+  width: 100%;
+  background-color: $primary;
+  padding: 10px;
 }
 
 button {
-    font-size: 2.5rem;
-    margin-left: 5px;
-    padding: 0;
-    background-color: $primaryBackground;
+  font-size: 2.5rem;
+  margin-left: 5px;
+  padding: 0;
+  background-color: $primaryBackground;
 }
 
 .itemWrapper {
-    width: 225px;
-    position: absolute;
-    margin-right: auto;
-    margin-left: auto;
-    left: 0;
-    right: 0;
+  width: 225px;
+  position: absolute;
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
 }
 
 .addedItem {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .location {
-    background-color: $primary;
-    padding: 5px;
+  background-color: $primary;
+  padding: 5px;
 }
 
 .done,
 .notDone {
-    min-width: 180px;
-    margin-left: 15px;
-    margin-top: 5px;
+  min-width: 180px;
+  margin-left: 15px;
+  margin-top: 5px;
 }
 
 .done {
-    text-decoration: line-through;
-    opacity: 0.5;
+  text-decoration: line-through;
+  opacity: 0.5;
 }
 
-
-
 .itemAndCheck {
-    display: flex;
-    align-items: flex-start;
+  display: flex;
+  align-items: flex-start;
 }
 
 .location {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .icon:hover,
 button:hover,
 button:focus,
 a:hover,
-a:focus
- {
-    color: $accent;
+a:focus {
+  color: $accent;
 }
 
 select:hover,
 select:focus,
 input:hover,
 input:focus {
-    border: 3px solid $accent;
+  border: 3px solid $accent;
 }
-    .saveText,
-    .editText,
-    .removeText,
-    .addText {
-        display: none;
-    }
-
+.saveText,
+.editText,
+.removeText,
+.addText {
+  display: none;
+}
 
 // media breakpoint to keep item list from expanding too much on larger screens
 @media (min-width: 375px) {
-    .wrapper {
-        max-width: 550px;
-    }
+  .wrapper {
+    max-width: 550px;
+  }
 
-    .edit,
-    .removeButton,
-    .addButton,
-    .save {
-        width: 30px;
-        display: flex;
-        align-items: center;
-        & span {
-            font-size: 1.6rem;
-            font-family: $primaryFont;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding-left: 5px;
-        }
+  .edit,
+  .removeButton,
+  .addButton,
+  .save {
+    width: 30px;
+    display: flex;
+    align-items: center;
+    & span {
+      font-size: 1.6rem;
+      font-family: $primaryFont;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding-left: 5px;
     }
+  }
 }
 
 // media breakpoint to show button descriptions
 @media (min-width: 520px) {
-    .edit,
-    .removeButton,
-    .addButton
-    .save {
-        width: 100px;
-    }
+  .edit,
+  .removeButton,
+  .addButton .save {
+    width: 100px;
+  }
 
-     .editText,
-     .removeText,
-     .addText,
-     .saveText {
-        display: inline-block;
-    }
-
-
+  .editText,
+  .removeText,
+  .addText,
+  .saveText {
+    display: inline-block;
+  }
 }
-
-
-
