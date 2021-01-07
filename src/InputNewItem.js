@@ -47,8 +47,7 @@ class InputNewItem extends Component {
         onSubmit={(this.state.userInput !== '' && this.state.dept !== 'choose location')
           ? this.handleSubmit
           : null}
-        className='newItemForm'
-      >
+        className='newItemForm'>
         <div className='itemInput'>
           {/* item input text area */}
           <label htmlFor='newItem'>Item: </label>
