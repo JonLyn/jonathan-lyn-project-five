@@ -9,7 +9,7 @@ class UpdateItem extends Component {
     super()
     this.state = {
       itemToEdit: '',
-      newDept: 'choose location',
+      newDept: "don't know",
       showDropdown: false
     }
   }
