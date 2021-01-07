@@ -6,7 +6,7 @@ class DepartmentList extends Component {
     return (
       <Fragment>
         <option value='choose location' disabled>Choose location</option>
-        <option value='don&#39t know'>Don't know</option>
+        <option value="don't know">Don't know</option>
         <option value='bakery'>Bakery</option>
         <option value='dairy'>Dairy</option>
         <option value='deli'>Deli</option>
