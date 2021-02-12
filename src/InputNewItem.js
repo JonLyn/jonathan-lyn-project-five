@@ -81,7 +81,7 @@ class InputNewItem extends Component {
               icon={['far', 'plus-square']}
               type='submit'
             />
-            <span className='addText'>Adds</span>
+            <span className='addText'>Add</span>
           </button>
         </div>
       </form>
